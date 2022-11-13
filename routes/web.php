@@ -24,3 +24,15 @@ Route::get('/home', function () {
 Route::get('/administrator', function () {
     return view('admin.home');
 });
+
+Route::get('/contact', function () {
+    return view('landingpage.contact');
+});
+
+Route::get('/about', function () {
+    return view('landingpage.about');
+});
+
+Route::get('/donasi', function () {
+    return view('landingpage.donasi');
+});
