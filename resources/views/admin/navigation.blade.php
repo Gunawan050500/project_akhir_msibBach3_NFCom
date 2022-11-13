@@ -27,6 +27,14 @@
 					    <a href="index.html" class="nav-link "><span class="pcoded-micon"><i class="feather icon-home"></i></span><span class="pcoded-mtext">Dashboard</span></a>
 					</li>
 					<li class="nav-item pcoded-hasmenu">
+					    <a href="#!" class="nav-link "><span class="pcoded-micon"><i class="feather icon-layout"></i></span><span class="pcoded-mtext">Master Data</span></a>
+					    <ul class="pcoded-submenu">
+					        <li><a href="{{ url('/anak_asuh') }}">Anak Asuh</a></li>
+					        <li><a href="{{ url('/donatur') }}">Donatur</a></li>
+					        <li><a href="{{ url('/donasi') }}">Donasi</a></li>
+					    </ul>
+					</li>
+					<li class="nav-item pcoded-hasmenu">
 					    <a href="#!" class="nav-link "><span class="pcoded-micon"><i class="feather icon-layout"></i></span><span class="pcoded-mtext">Page layouts</span></a>
 					    <ul class="pcoded-submenu">
 					        <li><a href="layout-vertical.html" target="_blank">Vertical</a></li>

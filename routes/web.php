@@ -2,6 +2,10 @@
 
 use Illuminate\Support\Facades\Route;
 
+use App\Http\Controllers\Anak_asuhController;
+use App\Http\Controllers\DonaturController;
+use App\Http\Controllers\DonasiController;
+
 /*
 |--------------------------------------------------------------------------
 | Web Routes
@@ -24,3 +28,7 @@ Route::get('/home', function () {
 Route::get('/administrator', function () {
     return view('admin.home');
 });
+
+Route::resource('anak_asuh', Anak_asuhController::class);
+Route::resource('donatur', DonaturController::class);
+Route::resource('donasi', DonasiController::class);
