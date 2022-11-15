@@ -57,7 +57,8 @@ class DonaturController extends Controller
      */
     public function show($id)
     {
-        //
+        //arahkan ke detail
+        return view('donatur.detail');
     }
 
     /**

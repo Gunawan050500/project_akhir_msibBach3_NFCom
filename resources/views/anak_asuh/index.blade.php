@@ -12,7 +12,7 @@
     </div>
     @endif
     <div class="mt-3">
-        <a class="bn btn-info btn-sm" href="{{route('anak_asuh.create')}}" title="Tambah Donatur">Tambah</a>
+        &nbsp;&nbsp;&nbsp;&nbsp;<a class="bn btn-info btn-sm" href="{{route('anak_asuh.create')}}" title="Tambah Donatur">Tambah</a>
     </div>
     <div class="card-body">
             <div class="table-responsive">

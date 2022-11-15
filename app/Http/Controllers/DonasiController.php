@@ -49,7 +49,8 @@ class DonasiController extends Controller
      */
     public function show($id)
     {
-        //
+        //arahkan ke detail
+        return view('donasi.detail');
     }
 
     /**

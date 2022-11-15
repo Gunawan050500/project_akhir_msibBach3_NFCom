@@ -15,13 +15,12 @@
 
             <div class="collapse navbar-collapse" id="navbarNav">
                 <ul class="navbar-nav ms-auto">
-                    <li class="nav-item">
-                        <a class="nav-link click-scroll" href="#top">Beranda</a>
-                    </li>
-
-                    <li class="nav-item">
-                        <a class="nav-link click-scroll" href="#section_2">Tentang Kami</a>
-                    </li>
+                <li class="nav-item">
+                    <a class="nav-link" href="{{ url('/home')}}">Home</a>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link" href="{{ url('/about')}}">About Us</a>
+                </li>
 
                     <li class="nav-item">
                         <a class="nav-link click-scroll" href="#section_3">Kegiatan</a>
@@ -30,21 +29,21 @@
                     <li class="nav-item dropdown">
                         <a class="nav-link click-scroll dropdown-toggle" href="#section_5"
                             id="navbarLightDropdownMenuLink" role="button" data-bs-toggle="dropdown"
-                            aria-expanded="false">Library</a>
+                            aria-expanded="false">News</a>
 
                         <ul class="dropdown-menu dropdown-menu-light" aria-labelledby="navbarLightDropdownMenuLink">
-                            <li><a class="dropdown-item" href="news.html">Struktur Pengurus</a></li>
+                            <li><a class="dropdown-item" href="news.html">News Listing</a></li>
 
-                            <li><a class="dropdown-item" href="news-detail.html">Data Anak Asuh</a></li>
+                            <li><a class="dropdown-item" href="news-detail.html">News Detail</a></li>
                         </ul>
                     </li>
 
                     <li class="nav-item">
-                        <a class="nav-link click-scroll" href="#section_6">Kontak</a>
+                        <a class="nav-link click-scroll" href="{{ url('/contact')}}">Kontak</a>
                     </li>
 
                     <li class="nav-item ms-3">
-                        <a class="nav-link custom-btn custom-border-btn btn" href="donate.html">Donate</a>
+                        <a class="nav-link custom-btn custom-border-btn btn" href="{{ url('/Donasi')}}">Donasi</a>
                     </li>
                 </ul>
             </div>

@@ -8,19 +8,19 @@
                         <div id="hero-slide" class="carousel carousel-fade slide" data-bs-ride="carousel">
                             <div class="carousel-inner">
                                 <div class="carousel-item active">
-                                    <img src="{{ url ('landingpage/images/slide/volunteer-helping-with-donation-box.jpg') }}"
-                                        class="carousel-image img-fluid" alt="...">
+                                    <img src="{{ url ('landingpage/images/slide/poster1.jpg') }}"
+                                        class="carousel-image img-fluid" width="100%" alt="...">
 
                                     <div class="carousel-caption d-flex flex-column justify-content-end">
                                         <h1>be a Kind Heart</h1>
 
-                                        <p>Professional charity theme based on Bootstrap 5.2.2</p>
+                                        <p>a kind heart brings happiness</p>
                                     </div>
                                 </div>
 
                                 <div class="carousel-item">
-                                    <img src="{{ url ('landingpage/images/slide/volunteer-selecting-organizing-clothes-donations-charity.jpg') }}"
-                                        class="carousel-image img-fluid" alt="...">
+                                    <img src="{{ url ('landingpage/images/slide/poster2.jpg') }}"
+                                        class="carousel-image img-fluid" width="100%" alt="...">
 
                                     <div class="carousel-caption d-flex flex-column justify-content-end">
                                         <h1>Non-profit</h1>
@@ -30,8 +30,8 @@
                                 </div>
 
                                 <div class="carousel-item">
-                                    <img src="{{ url ('landingpage/images/slide/medium-shot-people-collecting-donations.jpg') }}"
-                                        class="carousel-image img-fluid" alt="...">
+                                    <img src="{{ url ('landingpage/images/slide/poster3.jpg') }}"
+                                        class="carousel-image img-fluid" width="100%" alt="...">
 
                                     <div class="carousel-caption d-flex flex-column justify-content-end">
                                         <h1>Humanity</h1>
@@ -65,7 +65,7 @@
                 <div class="row">
 
                     <div class="col-lg-10 col-12 text-center mx-auto">
-                        <h2 class="mb-5">Welcome to Kind Heart Charity</h2>
+                        <h2 class="mb-5">Welcome to Rumah Yatim</h2>
                     </div>
 
                     <div class="col-lg-3 col-md-6 col-12 mb-4 mb-lg-0">
@@ -81,9 +81,9 @@
                     <div class="col-lg-3 col-md-6 col-12 mb-4 mb-lg-0 mb-md-4">
                         <div class="featured-block d-flex justify-content-center align-items-center">
                             <a href="donate.html" class="d-block">
-                                <img src="{{ url ('landingpage/images/icons/heart.png') }}" class="featured-block-image img-fluid" alt="">
+                                <img src="{{ url ('landingpage/images/icons/humanity.png') }}" class="featured-block-image img-fluid" alt="">
 
-                                <p class="featured-block-text"><strong>Caring</strong> Earth</p>
+                                <p class="featured-block-text"><strong>Care</strong> about humanity</p>
                             </a>
                         </div>
                     </div>

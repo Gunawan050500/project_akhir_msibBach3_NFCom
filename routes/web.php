@@ -29,6 +29,18 @@ Route::get('/administrator', function () {
     return view('admin.home');
 });
 
+Route::get('/contact', function () {
+    return view('landingpage.contact');
+});
+
+Route::get('/about', function () {
+    return view('landingpage.about');
+});
+
+Route::get('/Donasi', function () {
+    return view('landingpage.donasi');
+});
+
 Route::resource('anak_asuh', Anak_asuhController::class);
 Route::resource('donatur', DonaturController::class);
 Route::resource('donasi', DonasiController::class);

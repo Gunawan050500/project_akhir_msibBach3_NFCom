@@ -20,14 +20,7 @@
     <link rel="icon" href="{{ url ('admin/images/favicon.ico') }}" type="image/x-icon">
 
     <!-- vendor css -->
-    <link rel="stylesheet" href="{{ asset ('admin/css/style.css') }}">
-
-    {{-- datatables css --}}
-    <link rel="stylesheet" type="text/css" href="{{ asset ('admin/css/datatables.css') }}">
-    <link href="{{ asset ('admin/datatables/dataTables.bootstrap4.min.css" rel="stylesheet') }}">
-    <link href="{{ ('admin/css/sb-admin-2.min.css') }}" rel="stylesheet">
-    
-    
+    <link rel="stylesheet" href="{{ asset ('admin/css/style.css') }}"> 
 
 </head>
 <body class="">
@@ -74,17 +67,6 @@
         <!-- [ Main Content ] end -->
     </div>
 </div>
-
-{{-- datatables js --}}
-<script type="text/javascript" charset="utf8" src="{{ asset ('admin/js/datatables.js') }}"></script>
-
-<!-- Page level plugins -->
-    <script src="{{ asset ('admin/datatables/jquery.dataTables.min.js') }}"></script>
-    <script src="{{ asset ('admin/datatables/dataTables.bootstrap4.min.js') }}"></script>
-
-    <!-- Page level custom scripts -->
-    <script src="{{ asset ('admin/datatables/datatables-demo.js') }}"></script>
-
 
     <!-- Required Js -->
     <script src="{{ asset ('admin/js/vendor-all.min.js') }}"></script>

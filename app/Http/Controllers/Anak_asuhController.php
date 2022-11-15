@@ -49,7 +49,8 @@ class Anak_asuhController extends Controller
      */
     public function show($id)
     {
-        //
+        //arahkan ke detail
+        return view('anak_asuh.detail');
     }
 
     /**
