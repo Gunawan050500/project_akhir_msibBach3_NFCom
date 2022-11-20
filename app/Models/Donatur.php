@@ -8,12 +8,13 @@ use Illuminate\Database\Eloquent\Model;
 class Donatur extends Model
 {
     use HasFactory;
+    //mapping ke tabel
     protected $table = 'donatur';
-    //mapping kolom atau fieldnya
+    //mapping ke kolom/fieldnya
     protected $fillable = ['nama', 'no_hp'];
     //relasi one to many ke tabel donasi
-    public function donatur()
+    public function donasi()
     {
-        return $this->hasMany(Donatur::class);
+        return $this->hasMany(Donasi::class);
     }
 }

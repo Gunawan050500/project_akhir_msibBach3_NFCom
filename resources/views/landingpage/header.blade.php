@@ -8,7 +8,7 @@
     <meta name="description" content="">
     <meta name="author" content="">
 
-    <title>Kind Heart Charity - Free Bootstrap 5.2.2 CSS Template</title>
+    <title>Rumah | Yatim</title>
 
     <!-- CSS FILES -->
     <link href="{{ asset ('landingpage/css/bootstrap.min.css') }}" rel="stylesheet">
@@ -35,14 +35,14 @@ https://templatemo.com/tm-581-kind-heart-charity
                 <div class="col-lg-8 col-12 d-flex flex-wrap">
                     <p class="d-flex me-4 mb-0">
                         <i class="bi-geo-alt me-2"></i>
-                        Akershusstranda 20, 0150 Oslo, Norway
+                        Blang Pulo, Muara Satu, Lhoukseumawe
                     </p>
 
                     <p class="d-flex mb-0">
                         <i class="bi-envelope me-2"></i>
 
                         <a href="mailto:info@company.com">
-                            info@company.com
+                           info_rmhytm@gmail.com
                         </a>
                     </p>
                 </div>

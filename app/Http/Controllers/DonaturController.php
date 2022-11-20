@@ -4,6 +4,12 @@ namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
 use App\Models\Donatur;
+use DB;
+use PDF;
+//ini extension data koneksinya
+use App\Exports\DonaturExport;
+//ini yang vendor excellnya
+use Maatwebsite\Excel\Facades\Excel;
 
 class DonaturController extends Controller
 {
@@ -15,7 +21,7 @@ class DonaturController extends Controller
     public function index()
     {
         //digunakan untuk menampilkan data secara keseluruhan
-        $donatur = Donatur::all();
+        $donatur = Donatur::orderBy('id', 'DESC')->get();
         return view('donatur.index', compact('donatur'));
         //di compact=> dengan membawa array divisi
     }
@@ -57,7 +63,8 @@ class DonaturController extends Controller
      */
     public function show($id)
     {
-        //
+        $row = Donatur::find($id);
+        return view('donatur.detail', compact('row'));
     }
 
     /**
@@ -68,7 +75,8 @@ class DonaturController extends Controller
      */
     public function edit($id)
     {
-        //
+        $row = Donatur::find($id);
+        return view('donatur.form_edit', compact('row'));
     }
 
     /**
@@ -80,7 +88,22 @@ class DonaturController extends Controller
      */
     public function update(Request $request, $id)
     {
-        //
+        //proses input donatur
+        $request->validate([
+            // 'nama' => 'required|unique:donatur|max:45',
+            'no_hp' => 'required',
+        ]);
+      
+        DB::table('donatur')->where('id',$id)->update(
+            [
+                // 'nama' => $request->nama,
+                'no_hp' => $request->no_hp,
+                'updated_at'=>now(),
+
+            ]);
+       
+        return redirect()->route('donatur.index')
+                        ->with('success','Donatur Berhasil Disimpan');
     }
 
     /**
@@ -91,6 +114,21 @@ class DonaturController extends Controller
      */
     public function destroy($id)
     {
-        //
+        $row = Donatur::find($id);
+        Donatur::where('id', $id)->delete();
+        return redirect()->route('donatur.index')
+                        -> with('success', 'Data Donatur Berhasil dihapus');
+    }
+
+    public function donaturPDF()
+    {
+       $donatur = Donatur::all();
+       $pdf = PDF::loadView('donatur.donaturPDF', ['donatur'=>$donatur]);
+       return $pdf->download('data_donatur.pdf');
+    }
+
+    public function donaturExcel()
+    {
+        return Excel::download(new DonaturExport, 'data_donatur.xlsx');
     }
 }
