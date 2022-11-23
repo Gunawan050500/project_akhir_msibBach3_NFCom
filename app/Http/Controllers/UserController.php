@@ -9,6 +9,8 @@ use PDF;
 use App\Exports\UserExport;
 //ini yang vendor excellnya
 use Maatwebsite\Excel\Facades\Excel;
+//ini digunakan untuk alert
+use Alert;
 
 class UserController extends Controller
 {
@@ -20,7 +22,7 @@ class UserController extends Controller
     public function index()
     {
         //dignakan untuk menampilkan data secara keseluruhan
-        $user = User::orderBy('id', 'DESC')->get();
+        $user = User::orderBy('id', 'DESC')->paginate(10);
          return view('user.index', compact('user'));
          //di compact=> dengan membawa array divisi
     }
@@ -53,7 +55,22 @@ class UserController extends Controller
             'status' => 'required',
             'role' => 'required',
             'foto' => 'nullable|image|mimes:jpg,jpeg,png,gift,svg|max:2048',
-        ]);
+        ],
+
+        [
+            'nama.required'=> 'Nama Wajib diisi',
+            'nama.max'=> 'Karakter maksimal 20',
+            'no_hp.required'=> 'No. Handphone Wajib diisi',
+            'email.required'=> 'Email Wajib diisi',
+            'email.unique'=> 'Email ini sudah didaftarkan',
+            'password.required'=> 'Password Wajib diinputkan',
+            'status.required'=> 'Status Wajib diinputkan',
+            'role.required'=> 'Role Wajib diinputkan',
+            'foto.mimes'=> 'Foto harus berupa jpg, png, girf, svg',
+            'foto.max'=> 'Ukuran foto maksimal 2048 KB',
+
+        ]
+    );
 
         //apakah user inin upload foto
         if(!empty($request->foto)){
@@ -184,5 +201,18 @@ class UserController extends Controller
     public function userExcel()
     {
         return Excel::download(new UserExport, 'data_user.xlsx');
+    }
+
+    public function cari(Request $request)
+    {
+        // menangkap data pencarian
+		$cari = $request->cari;
+ 
+    	// mengambil data dari table pegawai sesuai pencarian data
+		$user = DB::table('users')
+		->where('nama','like',"%".$cari."%")
+        ->paginate();
+    		// mengirim data pegawai ke view index
+        return view('user.index', compact('user'));
     }
 }

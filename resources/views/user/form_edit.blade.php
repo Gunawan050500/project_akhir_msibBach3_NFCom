@@ -51,7 +51,7 @@ $ar_role = ['admin', 'pengurus'];
         <fieldset class="row mb-3">
             <legend class="col-form-label col-sm-2 pt-0">Status</legend>
             <div class="col-sm-10">
-                <div class="form-check ml-6" style="margin-left: 30%">
+                <div class="form-check ml-6" style="margin-left: 7%">
                     @foreach($ar_status as $status)
                     @php $check = ($status == $row->status) ? 'checked' : ''; @endphp
                     <div class="form-check">
@@ -68,7 +68,7 @@ $ar_role = ['admin', 'pengurus'];
         <fieldset class="row mb-3">
             <legend class="col-form-label col-sm-2 pt-0">Role</legend>
             <div class="col-sm-10">
-                <div class="form-check ml-6" style="margin-left: 30%">
+                <div class="form-check ml-6" style="margin-left: 8%">
                     @foreach($ar_role as $role)
                     @php $check = ($role == $row->role) ? 'checked' : ''; @endphp
                     <div class="col-lg-7">
@@ -91,7 +91,7 @@ $ar_role = ['admin', 'pengurus'];
             </div>
         </div>
 </div>
-        <div class="text-center" style="margin-left: 27%">
+        <div class="text-left">
             <button type="submit" class="btn btn-success">Simpan</button>
             <a class="btn btn-secondary" href="{{url('user')}}">Cancel</a>
         </div>

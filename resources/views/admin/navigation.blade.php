@@ -36,6 +36,7 @@
 					        <li><a href="{{ url('/donatur') }}">Donatur</a></li>
 					        <li><a href="{{ url('/donasi') }}">Donasi</a></li>
 							<li><a href="{{ url('/user') }}">User</a></li>
+							<li><a href="{{ url('/kategori_kegiatan') }}">Kategori Kegiatan</a></li>
 					    </ul>
 					</li>
 					<li class="nav-item pcoded-menu-caption">

@@ -10,6 +10,6 @@
             <h6 class="card-subtitle mb-2 text-muted">{{$row->no_hp}}</h6>
 		</div>
 	</div>
-<a class="bn btn-info btn-sm" href="{{url('donatur')}}">Back</a>
+<a class="bn btn-info btn-lg" href="{{url('donatur')}}">Back</a>
 </div>
 @endsection

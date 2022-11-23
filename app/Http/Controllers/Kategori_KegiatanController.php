@@ -3,20 +3,17 @@
 namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
-use App\Models\Donatur;
+use App\Models\Kategori_Kegiatan;
 use DB;
 use PDF;
 //ini extension data koneksinya
-use App\Exports\DonaturExport;
-//ini yang vendor excellnya
+use App\Exports\Kategori_KegiatanExport;
+// //ini yang vendor excellnya
 use Maatwebsite\Excel\Facades\Excel;
 //ini bagian untuk sweetaler
 use Alert;
 
-//tutorial untuk pagination
-https://www.malasngoding.com/
-
-class DonaturController extends Controller
+class Kategori_KegiatanController extends Controller
 {
     /**
      * Display a listing of the resource.
@@ -25,11 +22,9 @@ class DonaturController extends Controller
      */
     public function index()
     {
-        //digunakan untuk menampilkan data secara keseluruhan
-        // $donatur = Donatur::orderBy('id', 'DESC')->get();
-        $donatur = Donatur::orderBy('id', 'DESC')->paginate(10);
-        return view('donatur.index', compact('donatur'));
-        //di compact=> dengan membawa array divisi
+        //menampilkan seluruh data
+        $kategori_kegiatan = Kategori_Kegiatan::orderBy('id', 'DESC')->paginate(10);
+        return view('kategori_kegiatan.index', compact('kategori_kegiatan'));
     }
 
     /**
@@ -39,7 +34,7 @@ class DonaturController extends Controller
      */
     public function create()
     {
-        return view ('donatur.form');
+        return view ('kategori_kegiatan.form');
     }
 
     /**
@@ -51,20 +46,18 @@ class DonaturController extends Controller
     public function store(Request $request)
     {
         $request->validate([
-            'nama' => 'required|unique:donatur|max:45',
-            'no_hp' => 'required',
+            'nama' => 'required|unique:kategori_kegiatan|max:45',
         ],
 
         [
             'nama.required' => 'Nama Wajib diisi',
             'nama.max' => 'Jumlah katakter maksimal 45',
-            'no_hp.required' => 'No Handphone Wajib diisi',
         ]);
       
-        Donatur::create($request->all());
+        Kategori_Kegiatan::create($request->all());
        
-        return redirect()->route('donatur.index')
-                        ->with('success','Donatur Berhasil Disimpan');
+        return redirect()->route('kategori_kegiatan.index')
+                        ->with('success','Kategori Kegiatan Berhasil Disimpan');
     }
 
     /**
@@ -75,8 +68,8 @@ class DonaturController extends Controller
      */
     public function show($id)
     {
-        $row = Donatur::find($id);
-        return view('donatur.detail', compact('row'));
+        $row = Kategori_Kegiatan::find($id);
+        return view('kategori_kegiatan.detail', compact('row'));
     }
 
     /**
@@ -87,8 +80,8 @@ class DonaturController extends Controller
      */
     public function edit($id)
     {
-        $row = Donatur::find($id);
-        return view('donatur.form_edit', compact('row'));
+        $row = Kategori_Kegiatan::find($id);
+        return view('kategori_kegiatan.form_edit', compact('row'));
     }
 
     /**
@@ -100,22 +93,20 @@ class DonaturController extends Controller
      */
     public function update(Request $request, $id)
     {
-        //proses input donatur
+        //proses input kategori_kegiatan
         $request->validate([
             'nama' => 'required|max:45',
-            'no_hp' => 'required',
         ]);
       
-        DB::table('donatur')->where('id',$id)->update(
+        DB::table('kategori_kegiatan')->where('id',$id)->update(
             [
                 'nama' => $request->nama,
-                'no_hp' => $request->no_hp,
                 'updated_at'=>now(),
 
             ]);
        
-        return redirect()->route('donatur.index')
-                        ->with('success','Donatur Berhasil Disimpan');
+        return redirect()->route('kategori_kegiatan.index')
+                        ->with('success','Kategori_Kegiatan Berhasil Disimpan');
     }
 
     /**
@@ -126,22 +117,22 @@ class DonaturController extends Controller
      */
     public function destroy($id)
     {
-        $row = Donatur::find($id);
-        Donatur::where('id', $id)->delete();
-        return redirect()->route('donatur.index')
-                        -> with('success', 'Data Donatur Berhasil dihapus');
+        $row = Kategori_Kegiatan::find($id);
+        Kategori_Kegiatan::where('id', $id)->delete();
+        return redirect()->route('kategori_kegiatan.index')
+                        -> with('success', 'Data Kategori_Kegiatan Berhasil dihapus');
     }
 
-    public function donaturPDF()
+    public function kategori_kegiatanPDF()
     {
-       $donatur = Donatur::all();
-       $pdf = PDF::loadView('donatur.donaturPDF', ['donatur'=>$donatur]);
-       return $pdf->download('data_donatur.pdf');
+       $kategori_kegiatan = Kategori_Kegiatan::all();
+       $pdf = PDF::loadView('kategori_kegiatan.kategori_kegiatanPDF', ['kategori_kegiatan'=>$kategori_kegiatan]);
+       return $pdf->download('data_kategori_kegiatan.pdf');
     }
 
-    public function donaturExcel()
+    public function kategori_kegiatanExcel()
     {
-        return Excel::download(new DonaturExport, 'data_donatur.xlsx');
+        return Excel::download(new Kategori_KegiatanExport, 'data_kategori_kegiatan.xlsx');
     }
 
     public function cari(Request $request)
@@ -150,10 +141,11 @@ class DonaturController extends Controller
 		$cari = $request->cari;
  
     		// mengambil data dari table pegawai sesuai pencarian data
-		$donatur = DB::table('donatur')
+		$kategori_kegiatan = DB::table('kategori_kegiatan')
 		->where('nama','like',"%".$cari."%")
         ->paginate();
     		// mengirim data pegawai ke view index
-        return view('donatur.index', compact('donatur'));
+        return view('kategori_kegiatan.index', compact('kategori_kegiatan'));
     }
 }
+
