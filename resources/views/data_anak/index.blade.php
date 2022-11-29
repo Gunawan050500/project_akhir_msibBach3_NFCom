@@ -5,26 +5,11 @@
         <h6 class="m-0 font-weight-bold text-success">Data Anak Asuh</h6>
     </div>
     <div class="row">
-        <div class="col-6">
-            <a class="btn btn-info btn-sm ml-4" title="Tambah Donatur" href="{{route('donatur.create')}}"><i
-                    class="bi bi-file-plus-fill"></i>Tambah</a>
-            &nbsp;
-            <a class="btn btn-danger btn-sm" title="Export to PDF Donatur" href="{{url('donatur-pdf')}}"><i
-                    class="bi bi-filetype-pdf"></i></a>
-            &nbsp;
-            <a class="btn btn-success btn-sm" title="Export to Excel Donatur" href="{{url('donatur-excel')}}"><i
-                    class="bi bi-file-earmark-excel"></i></a>
-
-        </div>
-        <div class="col-6">
-            {{-- <form action="{{url('donatur-cari')}}" method="GET" class="mr-2">
-                <input type="text" name="cari" placeholder="Cari Donatur .." value="{{ old('cari') }}">
-                <input type="submit" value="Cari" class="bg-success">
-            </form>
-        </div> --}}
-
-        <nav class="justify-content-between mr-4" style="width: 70%">
-            <form class="form-inline" action="{{url('donatur-cari')}}" method="GET">
+    <div class="col-6">
+    </div>
+        <div class="col-6 my-2 mx-2">
+        <nav class="justify-content-between mr-4" style="width: 40%">
+            <form class="form-inline" action="{{url('data_anak-cari')}}" method="GET">
                 <input class="form-control mr-sm-2 form-sm" type="text" name="cari" placeholder="Search"
                     aria-label="Search" value="{{ old('cari') }}">
                 <input class="btn btn-outline-success" type="submit" value="Cari">
@@ -42,6 +27,7 @@
                         <th>Tanggal Lahir</th>
                         <th>Gender</th>
                         <th>Pendidikan</th>
+                        <th>Detail</th>
                     </tr>
                 </thead>
                 <tbody>
@@ -54,11 +40,22 @@
                         <td>{{ $row->tgl_lahir }}</td>
                         <td>{{ $row->gender }}</td>
                         <td>{{ $row->pendidikan }}</td>
+                        <td>
+                            <a class="btn btn-info btn-sm" title="Detail Anak Asuh"
+                                href="{{route('data_anak.show', $row->id)}}">
+                                <i class="bi bi-eye"></i>
+                            </a>
+                        </td>
                     </tr>
                     @endforeach
                 </tbody>
             </table>
         </div>
+        <br/>
+        Halaman : {{ $anak_asuh->currentPage() }} <br />
+        Jumlah Data : {{ $anak_asuh->total() }} <br />
+        Data Per Halaman : {{ $anak_asuh->perPage() }} <br/>
+        {{--  {{ $anak_asuh->links() }}  --}}
     </div>
 </div>
 </div>

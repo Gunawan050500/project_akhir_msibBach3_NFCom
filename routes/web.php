@@ -8,7 +8,8 @@ use App\Http\Controllers\DonasiController;
 use App\Http\Controllers\UserController;
 use App\Http\Controllers\DashboardController;
 use App\Http\Controllers\Kategori_KegiatanController;
-
+use App\Http\Controllers\Data_anakController;
+use App\Http\Controllers\Data_strukturController;
 /*
 |--------------------------------------------------------------------------
 | Web Routes
@@ -50,6 +51,10 @@ Route::resource('donasi', DonasiController::class);
 Route::resource('user', UserController::class);
 Route::resource('kategori_kegiatan', Kategori_KegiatanController::class);
 
+//ini tambahan route untuk data di landingpage
+Route::resource('data_anak', Data_anakController::class);
+Route::resource('data_struktur', Data_strukturController::class);
+
 //wxport bagian donatur
 Route::get('donatur-pdf', [DonaturController::class, 'donaturPDF']);
 Route::get('donatur-excel', [DonaturController::class, 'donaturExcel']);
@@ -70,3 +75,5 @@ Route::get('user-edit/{id}', [UserController::class, 'edit']);
 Route::get('donatur-cari', [DonaturController::class, 'cari']);
 Route::get('kategori_kegiatan-cari', [Kategori_KegiatanController::class, 'cari']);
 Route::get('user-cari', [UserController::class, 'cari']);
+Route::get('data_anak-cari', [Data_anakController::class, 'cari']);
+Route::get('data_struktur-cari', [Data_strukturController::class, 'cari']);

@@ -1,15 +1,10 @@
-@extends('admin.index')
+@extends('landingpage.index')
 @section('content')
 <section style="background-color: #eee;" class="col-md-12">
   <div class="container py-5">
     <div class="row">
       <div class="col-lg-4">
         <div class="card mb-4">
-        @if ($message = Session::get('success'))
-                <div class="alert alert-success">
-                    <p>{{ $message }}</p>
-                </div>
-            @endif
           <div class="card-body text-center">
             @empty($row->foto)
               <img src="{{url('admin/images/no_photo.png')}}" alt="Profile" class="rounded-circle" style="width:40%; margin-top: 10%; margin-left: 20%">
@@ -65,7 +60,7 @@
           </div>
         </div>
     <div>
-          <a class="btn btn-info btn-sm" href="{{url('user')}}">Back</a>
+          <a class="btn btn-info btn-sm" href="{{url('data_struktur')}}">Back</a>
         </div>
       </div>
     </div>

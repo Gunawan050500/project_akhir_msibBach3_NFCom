@@ -16,7 +16,7 @@ class Anak_asuhController extends Controller
     public function index()
     {
         //menampilkan seluruh data
-        $anak_asuh = Anak_asuh::all();
+        $anak_asuh = Anak_asuh::orderBy('id', 'DESC')->paginate(10);
         return view('anak_asuh.index', compact('anak_asuh'));
     }
 

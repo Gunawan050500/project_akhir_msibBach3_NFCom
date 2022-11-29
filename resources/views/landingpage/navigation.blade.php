@@ -32,9 +32,9 @@
                             aria-expanded="false">Library</a>
 
                         <ul class="dropdown-menu dropdown-menu-light" aria-labelledby="navbarLightDropdownMenuLink">
-                            <li><a class="dropdown-item" href="news.html">Data Struktur</a></li>
+                            <li><a class="dropdown-item" href="{{ url('/data_struktur') }}">Data Struktur</a></li>
 
-                            <li><a class="dropdown-item" href="news-detail.html">Data Anak</a></li>
+                            <li><a class="dropdown-item" href="{{ url('/data_anak') }}">Data Anak</a></li>
                         </ul>
                     </li>
 
