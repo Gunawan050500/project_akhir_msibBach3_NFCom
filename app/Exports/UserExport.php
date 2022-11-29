@@ -4,9 +4,10 @@ namespace App\Exports;
 
 use App\Models\User;
 use Maatwebsite\Excel\Concerns\FromCollection;
+use Maatwebsite\Excel\Concerns\WithHeadings;
 use DB;
 
-class UserExport implements FromCollection
+class UserExport implements FromCollection, WithHeadings
 {
     /**
     * @return \Illuminate\Support\Collection

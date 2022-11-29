@@ -64,6 +64,9 @@ Route::get('user-pdf', [UserController::class, 'userPDF']);
 Route::get('user-excel', [UserController::class, 'userExcel']);
 Route::get('dashboard', [DashboardController::class, 'index']);
 
+//export bagian donasi
+Route::get('donasi-excel', [DonasiController::class, 'donasiExcel']);
+
 
 //export bagian user
 Route::get('kategori_kegiatan-pdf', [Kategori_KegiatanController::class, 'kategori_kegiatanPDF']);

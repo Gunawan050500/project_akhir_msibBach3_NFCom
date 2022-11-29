@@ -4,9 +4,10 @@ namespace App\Exports;
 
 use App\Models\Kategori_Kegiatan;
 use Maatwebsite\Excel\Concerns\FromCollection;
+use Maatwebsite\Excel\Concerns\WithHeadings;
 use DB;
 
-class Kategori_KegiatanExport implements FromCollection
+class Kategori_KegiatanExport implements FromCollection, WithHeadings
 {
     /**
     * @return \Illuminate\Support\Collection

@@ -4,9 +4,10 @@ namespace App\Exports;
 
 use App\Models\Donatur;
 use Maatwebsite\Excel\Concerns\FromCollection;
+use Maatwebsite\Excel\Concerns\WithHeadings;
 use DB;
 
-class DonaturExport implements FromCollection
+class DonaturExport implements FromCollection, WithHeadings
 {
     /**
     * @return \Illuminate\Support\Collection

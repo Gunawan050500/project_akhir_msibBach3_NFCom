@@ -1,20 +1,38 @@
 @extends('admin.index')
 @section('content')
 <div class="col-md-12">
-<div class="card shadow mb-4">
-    <div class="card-header py-3">
-        <h6 class="m-0 font-weight-bold text-primary">Data Donasi</h6>
-    </div>
-    
-    @if ($message = Session::get('success'))
-    <div class="alert alert-success">
-        <p>{{ $message }}</p>
-    </div>
-    @endif
-    <div class="mt-3">
-        <a class="bn btn-info btn-sm" href="{{route('donasi.create')}}" title="Tambah Donatur">Tambah</a>
-    </div>
-    <div class="card-body">
+    <div class="card shadow mb-4">
+        <div class="card-header py-3">
+            <h6 class="m-0 font-weight-bold text-primary">Data Donasi</h6>
+        </div>
+
+        @if ($message = Session::get('success'))
+        <div class="alert alert-success">
+            <p>{{ $message }}</p>
+        </div>
+        @endif
+        <div class="mt-3">
+            <div class="row">
+                <div class="col-6">
+                    <a class="btn btn-success btn-sm" title="Export to Excel Donasi" href="{{url('donasi-excel')}}"><i
+                            class="bi bi-file-earmark-excel"></i></a>
+
+                </div>
+                <div class="col-6">
+                <nav class="justify-content-between mr-4" style="width: 70%">
+                    <form class="form-inline" action="{{url('donatur-cari')}}" method="GET">
+                        <input class="form-control mr-sm-2 form-sm" type="text" name="cari" placeholder="Search"
+                            aria-label="Search" value="{{ old('cari') }}">
+                        <input class="btn btn-outline-success" type="submit" value="Cari">
+                    </form>
+                </nav>
+            </div>
+
+        </div>
+        <div class="mt-3">
+            <a class="bn btn-info btn-sm" href="{{route('donasi.create')}}" title="Tambah Donatur">Tambah</a>
+        </div>
+        <div class="card-body">
             <div class="table-responsive">
                 <table class="table table-bordered" id="dataTable" width="100%" cellspacing="0">
                     <thead>
@@ -37,9 +55,9 @@
                             <td>{{ $row->jml_donasi }}</td>
                             <td>{{ $row->donatur->nama }}</td>
                             <td>
-                            <a title="Detail Donatur" href="{{ route('donasi.show',$row->id) }}">
-                            <i class="fa fa-eye"></i>
-                            </a>
+                                <a title="Detail Donatur" href="{{ route('donasi.show',$row->id) }}">
+                                    <i class="fa fa-eye"></i>
+                                </a>
                             </td>
                         </tr>
                         @endforeach
@@ -48,5 +66,5 @@
             </div>
         </div>
     </div>
-    </div>
+</div>
 @endsection

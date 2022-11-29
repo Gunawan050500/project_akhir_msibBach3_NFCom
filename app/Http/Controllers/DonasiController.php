@@ -4,6 +4,11 @@ namespace App\Http\Controllers;
 
 use App\Models\Donasi;
 use Illuminate\Http\Request;
+//ini extension data koneksinya
+use App\Exports\DonasiExport;
+//ini yang vendor excellnya
+use Maatwebsite\Excel\Facades\Excel;
+//ini bagian untuk sweetaler
 
 class DonasiController extends Controller
 {
@@ -85,5 +90,10 @@ class DonasiController extends Controller
     public function destroy($id)
     {
         //
+    }
+
+    public function donasiExcel()
+    {
+        return Excel::download(new DonasiExport, 'data_donasi.xlsx');
     }
 }
