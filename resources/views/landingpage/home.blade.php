@@ -8,8 +8,8 @@
                         <div id="hero-slide" class="carousel carousel-fade slide" data-bs-ride="carousel">
                             <div class="carousel-inner">
                                 <div class="carousel-item active">
-                                    <img src="{{ url ('landingpage/images/slide/poster1.jpg') }}"
-                                        class="carousel-image img-fluid" width="100%" alt="...">
+                                    <img src="{{ url ('landingpage/images/slide/Poster1.jpg') }}"
+                                        class="carousel-image img-fluid" alt="...">
 
                                     <div class="carousel-caption d-flex flex-column justify-content-end">
                                         <h1>be a Kind Heart</h1>
@@ -19,8 +19,8 @@
                                 </div>
 
                                 <div class="carousel-item">
-                                    <img src="{{ url ('landingpage/images/slide/poster2.jpg') }}"
-                                        class="carousel-image img-fluid" width="100%" alt="...">
+                                    <img src="{{ url ('landingpage/images/slide/Poster2.jpg') }}"
+                                        class="carousel-image img-fluid" alt="...">
 
                                     <div class="carousel-caption d-flex flex-column justify-content-end">
                                         <h1>Non-profit</h1>
@@ -30,8 +30,8 @@
                                 </div>
 
                                 <div class="carousel-item">
-                                    <img src="{{ url ('landingpage/images/slide/poster3.jpg') }}"
-                                        class="carousel-image img-fluid" width="100%" alt="...">
+                                    <img src="{{ url ('landingpage/images/slide/Poster3.jpg') }}"
+                                        class="carousel-image img-fluid" alt="...">
 
                                     <div class="carousel-caption d-flex flex-column justify-content-end">
                                         <h1>Humanity</h1>

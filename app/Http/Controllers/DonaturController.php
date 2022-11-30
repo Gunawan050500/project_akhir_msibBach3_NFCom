@@ -2,8 +2,19 @@
 
 namespace App\Http\Controllers;
 
-use App\Models\Donatur;
 use Illuminate\Http\Request;
+use App\Models\Donatur;
+use Illuminate\Support\Facades\DB;
+use Barryvdh\DomPDF\Facade\Pdf;
+//ini extension data koneksinya
+use App\Exports\DonaturExport;
+//ini yang vendor excellnya
+use Maatwebsite\Excel\Facades\Excel;
+//ini bagian untuk sweetaler
+use RealRashid\SweetAlert\Facades\Alert;
+
+//tutorial untuk pagination
+https: //www.malasngoding.com/
 
 class DonaturController extends Controller
 {
@@ -14,9 +25,11 @@ class DonaturController extends Controller
      */
     public function index()
     {
-        //menampilkan seluruh data
-        $donatur = Donatur::all();
+        //digunakan untuk menampilkan data secara keseluruhan
+        // $donatur = Donatur::orderBy('id', 'DESC')->get();
+        $donatur = Donatur::orderBy('id', 'DESC')->paginate(10);
         return view('donatur.index', compact('donatur'));
+        //di compact=> dengan membawa array divisi
     }
 
     /**
@@ -26,7 +39,6 @@ class DonaturController extends Controller
      */
     public function create()
     {
-        //arahkan ke form input data
         return view('donatur.form');
     }
 
@@ -38,10 +50,18 @@ class DonaturController extends Controller
      */
     public function store(Request $request)
     {
-        $request->validate([
-            'nama' => 'required|unique:donatur|max:45',
-            'no_hp' => 'required'
-        ]);
+        $request->validate(
+            [
+                'nama' => 'required|unique:donatur|max:45',
+                'no_hp' => 'required',
+            ],
+
+            [
+                'nama.required' => 'Nama Wajib diisi',
+                'nama.max' => 'Jumlah katakter maksimal 45',
+                'no_hp.required' => 'No Handphone Wajib diisi',
+            ]
+        );
 
         Donatur::create($request->all());
 
@@ -57,8 +77,8 @@ class DonaturController extends Controller
      */
     public function show($id)
     {
-        //arahkan ke detail
-        return view('donatur.detail');
+        $row = Donatur::find($id);
+        return view('donatur.detail', compact('row'));
     }
 
     /**
@@ -69,7 +89,8 @@ class DonaturController extends Controller
      */
     public function edit($id)
     {
-        //
+        $row = Donatur::find($id);
+        return view('donatur.form_edit', compact('row'));
     }
 
     /**
@@ -81,7 +102,23 @@ class DonaturController extends Controller
      */
     public function update(Request $request, $id)
     {
-        //
+        //proses input donatur
+        $request->validate([
+            'nama' => 'required|max:45',
+            'no_hp' => 'required',
+        ]);
+
+        DB::table('donatur')->where('id', $id)->update(
+            [
+                'nama' => $request->nama,
+                'no_hp' => $request->no_hp,
+                'updated_at' => now(),
+
+            ]
+        );
+
+        return redirect()->route('donatur.index')
+            ->with('success', 'Donatur Berhasil Disimpan');
     }
 
     /**
@@ -92,6 +129,34 @@ class DonaturController extends Controller
      */
     public function destroy($id)
     {
-        //
+        $row = Donatur::find($id);
+        Donatur::where('id', $id)->delete();
+        return redirect()->route('donatur.index')
+            ->with('success', 'Data Donatur Berhasil dihapus');
+    }
+
+    public function donaturPDF()
+    {
+        $donatur = Donatur::all();
+        $pdf = PDF::loadView('donatur.donaturPDF', ['donatur' => $donatur]);
+        return $pdf->download('data_donatur.pdf');
+    }
+
+    public function donaturExcel()
+    {
+        return Excel::download(new DonaturExport, 'data_donatur.xlsx');
+    }
+
+    public function cari(Request $request)
+    {
+        // menangkap data pencarian
+        $cari = $request->cari;
+
+        // mengambil data dari table pegawai sesuai pencarian data
+        $donatur = DB::table('donatur')
+            ->where('nama', 'like', "%" . $cari . "%")
+            ->paginate();
+        // mengirim data pegawai ke view index
+        return view('donatur.index', compact('donatur'));
     }
 }

@@ -6,7 +6,7 @@
                 <div class="row">
 
                     <div class="col-lg-6 col-12 mb-5 mb-lg-0">
-                        <img src="{{ url ('landingpage/images/different-people-doing-volunteer-work.jpg') }}"
+                        <img src="{{ url ('landingpage/images/orang.jpg') }}"
                             class="custom-text-box-image img-fluid" alt="">
                     </div>
 
