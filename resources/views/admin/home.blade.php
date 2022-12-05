@@ -16,7 +16,7 @@
 </div> &emsp;&emsp;&emsp;&emsp;
 
 <div class="card" style="width: 18rem;">
-  <img src="{{ url ('admin/images/anak.jpg') }}">
+  <img src="{{ url ('admin/images/anak.JPG') }}">
     <div class="card-body">
         <h5 class="card-title">Anak Asuh</h5>
         <p class="card-text">Detail anak asuh yang di beri bantuan melaui kita dari donatur</p>
@@ -25,7 +25,7 @@
 </div>&emsp;&emsp;&emsp;&emsp;
 
 <div class="card" style="width: 18rem;">
-  <img src="{{ url ('admin/images/donatur.jpg') }}">
+  <img src="{{ url ('admin/images/donatur.JPG') }}">
     <div class="card-body">
         <h5 class="card-title">Donatur</h5>
         <p class="card-text">Detail pemberi dana santunan kepada anak asuh</p>
@@ -34,7 +34,7 @@
 </div>&emsp;&emsp;&emsp;&emsp;
 
 <div class="card" style="width: 18rem;">
-  <img src="{{ url ('admin/images/donasi.jpg') }}">
+  <img src="{{ url ('admin/images/donasi.JPG') }}">
     <div class="card-body">
         <h5 class="card-title">Donasi</h5>
         <p class="card-text">Detail dana yang terkumpul dari donatur sebagai bantuan kepada anak asuh</p>

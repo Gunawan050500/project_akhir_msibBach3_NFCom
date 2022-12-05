@@ -47,7 +47,7 @@
                             @enderror
 						</div>
                         <div class="form-group mb-4">
-                            <input id="password-confirm" type="password" class="form-control @error('password') is-invalid @enderror" name="password_confirmation" placeholder="Password">
+                            <input id="password-confirm" type="password" class="form-control @error('password') is-invalid @enderror" name="password_confirmation" placeholder="Confirm Password">
                         </div>
                         <div class="form-group mb-4">
                             <label class="form-label d-block">Status Sebagai:</label>
@@ -76,9 +76,9 @@
 							<input type="checkbox" class="custom-control-input" id="customCheck1">
 							<label class="custom-control-label" for="customCheck1">Remember me.</label>
 						</div>
-						<button class="btn btn-primary btn-block mb-4">Sign up</button>
+						<button class="btn btn-primary btn-block mb-4">Registrasi</button>
 						<hr>
-						<p class="mb-2">Already have an account? <a href="{{ route('login') }}" class="f-w-400">Signin</a></p>
+						<p class="mb-2">Sudah punya akun? <a href="{{ route('login') }}" class="f-w-400">Login</a></p>
                         </form>
 					</div>
 				</div>

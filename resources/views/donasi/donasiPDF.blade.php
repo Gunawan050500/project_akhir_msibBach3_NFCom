@@ -25,7 +25,7 @@
                 <td>{{ $no++ }}</td>
                 <td>{{ $row->keterangan }}</td>
                 <td>{{ $row->tgl_donasi }}</td>
-                <td>{{ $row->jml_donasi }}</td>
+                <td>Rp. {{ number_format($row->jml_donasi,2,',','.') }}</td>
                 <td>{{ $row->donatur->nama }}</td>
             </tr>
             @endforeach

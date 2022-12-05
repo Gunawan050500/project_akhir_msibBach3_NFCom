@@ -32,9 +32,9 @@
 							<input type="checkbox" class="custom-control-input" id="customCheck1">
 							<label class="custom-control-label" for="customCheck1">Remember me.</label>
 						</div>
-						<button class="btn btn-primary btn-block mb-4">Sign up</button>
+						<button class="btn btn-primary btn-block mb-4">Login</button>
 						<hr>
-						<p class="mb-2">Don't have an account? <a href="{{ route('register') }}" class="f-w-400">Sign up</a></p>
+						<p class="mb-2">Belum punya akun? <a href="{{ route('register') }}" class="f-w-400">Registrasi disini</a></p>
                         </form>
 					</div>
 				</div>

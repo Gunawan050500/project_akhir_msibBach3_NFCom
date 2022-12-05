@@ -95,6 +95,8 @@
     <script src="{{ asset ('landingpage/js/counter.js') }}"></script>
     <script src="{{ asset ('landingpage/js/custom.js') }}"></script>
 
+    
+
 </body>
 
 </html>

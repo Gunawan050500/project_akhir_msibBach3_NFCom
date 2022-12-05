@@ -189,7 +189,7 @@
                     <a href="#" class="dropdown-toggle" data-toggle="dropdown">
                         <i class="feather icon-user"></i>
                     </a>
-                    <div class="dropdown-menu dropdown-menu-right profile-notification">
+                    <div class="dropdown-menu dropdown-menu-left profile-notification">
                         <div class="pro-head">
                             @empty(Auth::user()->foto)
                                 <img src="{{ url('admin/images/nophotos.png') }}" alt="Profile" class="img-radius">

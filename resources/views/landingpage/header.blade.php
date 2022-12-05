@@ -52,6 +52,15 @@ https://templatemo.com/tm-581-kind-heart-charity
                         <li class="social-icon-item">
                             <a href="{{ url('/login') }}" class="social-icon-link bi-login">Login</a>
                         </li>
+                        {{-- <li class="social-icon-item">
+                        <a href="{{ route('logout') }}" class="dud-logout" title="Logout" 
+                            onclick="event.preventDefault(); document.getElementById('logout-form').submit();">
+                                logout
+                            </a>
+                            <form id="logout-form" action="{{ route('logout') }}" method="POST" class="d-none">
+                                @csrf
+                            </form>
+                        </li> --}}
                     </ul>
                 </div>
 

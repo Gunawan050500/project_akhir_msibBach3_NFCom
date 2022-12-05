@@ -40,7 +40,7 @@
             <div class="form-group row">
                 <label for="no_hp" class="col-sm-3 col-form-label">Tanggal Lahir</label>
                 <div class="col-sm-9">
-                    <input type="text" class="form-control @error('tgl_lahir') is-invalid @enderror" name="tgl_lahir" value="{{old('tgl_lahir')}}" placeholder="Tanggal Lahir">
+                    <input type="date" class="form-control @error('tgl_lahir') is-invalid @enderror" name="tgl_lahir" value="{{old('tgl_lahir')}}" placeholder="Tanggal Lahir">
                     @error('tgl_lahir')
                     <div class="invalid-feedback">
                     {{$message}}

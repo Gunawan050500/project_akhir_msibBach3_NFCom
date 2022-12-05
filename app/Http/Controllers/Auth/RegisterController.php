@@ -8,6 +8,7 @@ use App\Models\User;
 use Illuminate\Foundation\Auth\RegistersUsers;
 use Illuminate\Support\Facades\Hash;
 use Illuminate\Support\Facades\Validator;
+use RealRashid\SweetAlert\Facades\Alert;
 
 class RegisterController extends Controller
 {
@@ -92,6 +93,7 @@ class RegisterController extends Controller
      */
     protected function create(array $data)
     {
+        Alert::success('Registrasi Berhasil!', 'Anda baru bisa login hingga admin mengaktivasi akun mu, tunggu paling lambat 1x24 jam sampai admin mengaktifkan akunmu')->persistent('Close');
         return User::create([
             'nama' => $data['nama'],
             'no_hp' => $data['no_hp'],

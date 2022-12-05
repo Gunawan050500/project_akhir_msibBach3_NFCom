@@ -13,39 +13,40 @@
                 <span class="navbar-toggler-icon"></span>
             </button>
 
-            <div class="collapse navbar-collapse" id="navbarNav">
+            <div class="collapse navbar-collapse">
                 <ul class="navbar-nav ms-auto">
                 <li class="nav-item">
-                    <a class="nav-link" href="{{ url('/home')}}">Home</a>
+                    <a class="nav-linkk {{ Request::is('/') || Request::is('home') ? 'active' : ''}}" href="{{ url('/home')}}">Home</a>
                 </li>
                 <li class="nav-item">
-                    <a class="nav-link" href="{{ url('/about')}}">About Us</a>
+                    <a class="nav-linkk {{ Request::is('about') ? 'active' : ''}}" href="{{ url('/about')}}">Tentang Kami</a>
                 </li>
-
+                
                     <li class="nav-item">
-                        <a class="nav-link click-scroll" href="#section_3">Kegiatan</a>
+                        <a class="nav-linkk {{ Request::is('kategori') || Request::is('detail') ? 'active' : ''}}" href="#">Kegiatan</a>
                     </li>
 
                     <li class="nav-item dropdown">
-                        <a class="nav-link click-scroll dropdown-toggle" href="#section_5"
-                            id="navbarLightDropdownMenuLink" role="button" data-bs-toggle="dropdown"
-                            aria-expanded="false">Library</a>
-
+                    <a href="#" class="nav-linkk dropdown-toggle {{ Request::is('data_struktur')|| Request::is('data_anak') ? 'active' : ''}}" 
+                    data-bs-toggle="dropdown">Library</a>
                         <ul class="dropdown-menu dropdown-menu-light" aria-labelledby="navbarLightDropdownMenuLink">
-                            <li><a class="dropdown-item" href="news.html">Data Pengurus</a></li>
-
-                            <li><a class="dropdown-item" href="news-detail.html">Data Anak Asuh</a></li>
+                            <li><a class="dropdown-item {{ Request::is('data_struktur') ? 'active' : ''}}" 
+                            href="{{ url('/data_struktur')}}">Data Struktur</a></li>
+                            <li><a class="dropdown-item {{ Request::is('data_anak') ? 'active' : ''}}" 
+                            href="{{ url('/data_anak') }}">Data Anak</a></li>
                         </ul>
                     </li>
 
                     <li class="nav-item">
-                        <a class="nav-link click-scroll" href="{{ url('/contact')}}">Kontak</a>
+                        <a class="nav-linkk {{ Request::is('contact') ? 'active' : ''}}" href="{{ url('/contact')}}">Kontak</a>
                     </li>
 
                     <li class="nav-item ms-3">
-                        <a class="nav-link custom-btn custom-border-btn btn" href="{{ url('/Donasi')}}">Donasi</a>
+                        <a class="nav-linkk custom-btn custom-border-btn  {{ Request::is('Donasi') ? 'active' : ''}}"
+                         href="{{ url('/Donasi')}}">Donasi</a>
                     </li>
+
                 </ul>
             </div>
         </div>
-    </nav>
+</nav>
