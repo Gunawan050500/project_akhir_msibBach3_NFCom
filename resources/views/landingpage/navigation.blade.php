@@ -16,18 +16,18 @@
             <div class="collapse navbar-collapse" id="navbarNav">
                 <ul class="navbar-nav ms-auto">
                 <li class="nav-item">
-                    <a class="nav-link {{ Request::is('/') || Request::is('home') ? "active" : "" }}" href="{{ url('/home')}}">Home</a>
+                    <a class="nav-link" href="{{ url('/home')}}">Home</a>
                 </li>
                 <li class="nav-item">
-                    <a class="nav-link {{ Request::is('about') ? "active" : "" }}" href="{{ url('/about')}}">Tentang Kami</a>
+                    <a class="nav-link" href="{{ url('/about')}}">About Us</a>
                 </li>
 
                     <li class="nav-item">
-                        <a class="nav-link {{ Request::is('#') ? "active" : "" }}" href="#">Kegiatan</a>
+                        <a class="nav-link" href="{{ url('/data_kegiatan')}}">Kegiatan</a>
                     </li>
 
                     <li class="nav-item dropdown">
-                        <a class="nav-link dropdown-toggle" href="#section_5"
+                        <a class="nav-link click-scroll dropdown-toggle" href="#section_5"
                             id="navbarLightDropdownMenuLink" role="button" data-bs-toggle="dropdown"
                             aria-expanded="false">Library</a>
 
@@ -39,11 +39,11 @@
                     </li>
 
                     <li class="nav-item">
-                        <a class="nav-link {{ Request::is('contact') ? "active" : "" }}" href="{{ url('/contact')}}">Kontak</a>
+                        <a class="nav-link click-scroll" href="{{ url('/contact')}}">Kontak</a>
                     </li>
 
                     <li class="nav-item ms-3">
-                        <a class="nav-link custom-btn custom-border-btn btn  {{ Request::is('Donasi') ? "active" : "" }}" href="{{ url('/Donasi')}}">Donasi</a>
+                        <a class="nav-link custom-btn custom-border-btn btn" href="{{ url('/Donasi')}}">Donasi</a>
                     </li>
                 </ul>
             </div>

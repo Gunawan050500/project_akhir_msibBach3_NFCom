@@ -66,6 +66,9 @@
             </div>
           </div>
         </div>
+        <div>
+          <a class="bn btn-info btn-sm" href="{{url('anak_asuh')}}">Back</a>
+        </div>
       </div>
     </div>
   </div>

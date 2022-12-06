@@ -65,7 +65,7 @@
           </div>
         </div>
     <div>
-          <a class="btn btn-info btn-sm" href="{{url('user')}}">Back</a>
+          <a class="bn btn-info btn-lg" href="{{url('user')}}">Back</a>
         </div>
       </div>
     </div>

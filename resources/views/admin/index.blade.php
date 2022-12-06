@@ -34,7 +34,7 @@
     {{--  MDB  --}}
     <link href="https://cdnjs.cloudflare.com/ajax/libs/mdb-ui-kit/6.0.1/mdb.min.css"
     rel="stylesheet"/>
-
+    @livewireStyles
 </head>
 <body class="">
     @include('sweetalert::alert')
@@ -98,6 +98,7 @@
 
 <!-- custom-chart js -->
 <script src="{{ asset ('admin/js/pages/dashboard-main.js') }}"></script>
+@livewireScripts
 </body>
 
 </html>

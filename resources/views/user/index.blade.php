@@ -18,10 +18,10 @@
                             class="bi bi-file-plus-fill"></i>Tambah</a>
                     &nbsp;
                     <a class="btn btn-danger btn-sm" title="Export to PDF User" href="{{url('user-pdf')}}"><i
-                            class="bi bi-filetype-pdf"></i></a>
+                            class="fas fa-file-pdf"></i></a>
                     &nbsp;
                     <a class="btn btn-success btn-sm" title="Export to Excel User" href="{{url('user-excel')}}"><i
-                            class="bi bi-file-earmark-excel"></i></a>
+                            class="fas fa-file-excel"></i></a>
                 </div>
                 <div class="col-6">
                     <nav class="justify-content-between mr-4" style="width: 70%">
@@ -42,9 +42,9 @@
                                 <th>Nama</th>
                                 <th>No Handphone</th>
                                 <th>Email</th>
-                                <th>Password</th>
                                 <th>Status</th>
                                 <th>Role</th>
+                                <th>Active</th>
                                 <th>Foto</th>
                                 <th>Aksi</th>
                             </tr>
@@ -57,16 +57,17 @@
                                 <td>{{ $row->nama }}</td>
                                 <td>{{ $row->no_hp }}</td>
                                 <td>{{ $row->email }}</td>
-                                <td>{{ $row->password }}</td>
                                 <td>{{ $row->status }}</td>
                                 <td>{{ $row->role }}</td>
                                 <td>
+                                @livewire('user-isactive', ['model' => $row, 'field' => 'isactive'], key($row->id))
+                                </td>
+                                <td>
                                     @empty($row->foto)
-                                    <img src="{{url('admin/images/no_photo.png')}}" alt="Profile" class="rounded-circle"
-                                        style="width: 40%">
+                                    <img src="{{url('admin/images/nophotos.png')}}" width="30px" alt="Profile" class="rounded-circle">
                                     @else
-                                    <img src="{{url('admin/images')}}/{{$row->foto}}" alt="Profile"
-                                        class="rounded-circle" style="width: 40%">
+                                    <img src="{{url('admin/images')}}/{{$row->foto}}" width="30px" alt="Profile"
+                                        class="rounded-circle">
                                     @endempty
                                 </td>
                                 <td>
@@ -76,16 +77,16 @@
                                             @method('DELETE')
                                             <a class="btn btn-info btn-sm" title="Detail User"
                                                 href="{{route('user.show', $row->id)}}">
-                                                <i class="bi bi-eye"></i>
+                                                <i class="fa fa-eye"></i>
                                             </a>
                                             <a class="btn btn-warning btn-sm" title="Ubah User"
                                                 href="{{url('user-edit', $row->id)}}">
-                                                <i class="bi bi-pencil-square"></i>
+                                                <i class="fas fa-pencil-alt"></i>
                                             </a>
                                             <button type="submit" class="btn btn-danger btn-sm btnHapus"
                                                 title="Hapus User" data-action="{{route('user.destroy', $row->id)}}"
                                                 {{-- onclick="return confirm('Anda yakin data dihapus?')"> --}}>
-                                                <i class="bi bi-trash-fill"></i>
+                                                <i class="fas fa-trash-alt"></i>
                                             </button>
                                         </form>
                                 </td>
@@ -125,6 +126,17 @@
                     $('#formHapus').submit();
                 }
             })
+        })
+
+        $('body').on('change', '.btnIsActive', function(e) {
+        e.preventDefault();
+        var action = $(this).data('action');
+        Swal.fire({
+            title: 'Status Active Berhasil Di ubah',
+            icon: 'success',
+            showConfirmButton: true,
+            timer: 3000
+        })
         })
     </script>
     @endsection

@@ -2,13 +2,17 @@
 
 namespace App\Http\Controllers;
 
-use App\Models\Donasi;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\DB;
+use Barryvdh\DomPDF\Facade\Pdf;
 //ini extension data koneksinya
+use App\Models\Donasi;
+use App\Models\Donatur;
 use App\Exports\DonasiExport;
-//ini yang vendor excellnya
+// //ini yang vendor excellnya
 use Maatwebsite\Excel\Facades\Excel;
 //ini bagian untuk sweetaler
+use RealRashid\SweetAlert\Facades\Alert;
 
 class DonasiController extends Controller
 {
@@ -20,7 +24,7 @@ class DonasiController extends Controller
     public function index()
     {
         //menampilkan seluruh data
-        $donasi = Donasi::all();
+        $donasi = Donasi::orderBy('id', 'DESC')->paginate(10);
         return view('donasi.index', compact('donasi'));
     }
 
@@ -32,7 +36,8 @@ class DonasiController extends Controller
     public function create()
     {
         //arahkan ke form input data
-        return view('donasi.form');
+        $ar_donatur = Donatur::all();
+        return view('donasi.form', compact('ar_donatur'));
     }
 
     /**
@@ -43,7 +48,36 @@ class DonasiController extends Controller
      */
     public function store(Request $request)
     {
-        //
+        $request->validate(
+            [
+                'keterangan' => 'required|string|max:150',
+                'tgl_donasi' => 'required',
+                'jml_donasi' => 'required',
+                'donatur_id' => 'required',
+            ],
+
+            [
+                'keterangan.required' => 'Keterangan Wajib diisi',
+                'tgl_donasi.required' => 'Tanggal Donasi Wajib diisi',
+                'jml_donasi.required' => 'Jumlah Donasi Wajib diisi',
+                'donatur_id.required' => 'Kategori Kegiatan Wajib diisi',
+            ]
+        );
+
+        // DB::table('donasi')->insert(
+        //     [
+        //         'keterangan' => $request->keterangan,
+        //         'tgl_donasi' => $request->tgl_donasi,
+        //         'jml_donasi' => $request->jml_donasi,
+        //         'donatur_id' => $request->donatur_id,
+        //         'created_at' => now(),
+        //     ]
+        //     );
+        Donasi::create($request->all());
+
+
+        return redirect()->route('donasi.index')
+            ->with('success', 'donasi Berhasil Disimpan');
     }
 
     /**
@@ -55,7 +89,8 @@ class DonasiController extends Controller
     public function show($id)
     {
         //arahkan ke detail
-        return view('donasi.detail');
+        $row = Donasi::find($id);
+        return view('donasi.detail', compact('row'));
     }
 
     /**
@@ -66,7 +101,9 @@ class DonasiController extends Controller
      */
     public function edit($id)
     {
-        //
+        $ar_donatur = Donatur::all();
+        $row = Donasi::find($id);
+        return view('donasi.form_edit', compact('ar_donatur', 'row'));
     }
 
     /**
@@ -78,7 +115,26 @@ class DonasiController extends Controller
      */
     public function update(Request $request, $id)
     {
-        //
+        $request->validate([
+            'keterangan' => 'required',
+            'tgl_donasi' => 'required',
+            'jml_donasi' => 'required',
+            'donatur_id' => 'required',
+        ]);
+
+        DB::table('donasi')->where('id', $id)->update(
+            [
+                'keterangan' => $request->keterangan,
+                'tgl_donasi' => $request->tgl_donasi,
+                'jml_donasi' => $request->jml_donasi,
+                'donatur_id' => $request->donatur_id,
+                'updated_at' => now(),
+
+            ]
+        );
+
+        return redirect()->route('donasi.index')
+            ->with('success', 'donatur Berhasil Disimpan');
     }
 
     /**
@@ -89,11 +145,34 @@ class DonasiController extends Controller
      */
     public function destroy($id)
     {
-        //
+        $row = Donasi::find($id);
+        Donasi::where('id', $id)->delete();
+        return redirect()->route('donasi.index')
+            ->with('success', 'Data Kegiatan Berhasil dihapus');
+    }
+
+    public function donasiPDF()
+    {
+        $donasi = Donasi::all();
+        $pdf = PDF::loadView('donasi.donasiPDF', ['donasi' => $donasi]);
+        return $pdf->download('data_donasi.pdf');
     }
 
     public function donasiExcel()
     {
         return Excel::download(new DonasiExport, 'data_donasi.xlsx');
+    }
+
+    public function cari(Request $request)
+    {
+        // menangkap data pencarian
+        $cari = $request->cari;
+
+        // mengambil data dari table pegawai sesuai pencarian data
+        $kegiatan = DB::table('donasi')
+            ->where('keterangan', 'like', "%" . $cari . "%")
+            ->paginate();
+        // mengirim data pegawai ke view index
+        return view('donasi.index', compact('donasi'));
     }
 }

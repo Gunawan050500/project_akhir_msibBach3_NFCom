@@ -4,17 +4,17 @@ namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
 use App\Models\Donatur;
-use DB;
-use PDF;
+use Illuminate\Support\Facades\DB;
+use Barryvdh\DomPDF\Facade\Pdf;
 //ini extension data koneksinya
 use App\Exports\DonaturExport;
 //ini yang vendor excellnya
 use Maatwebsite\Excel\Facades\Excel;
 //ini bagian untuk sweetaler
-use Alert;
+use RealRashid\SweetAlert\Facades\Alert;
 
 //tutorial untuk pagination
-https://www.malasngoding.com/
+https: //www.malasngoding.com/
 
 class DonaturController extends Controller
 {
@@ -32,6 +32,46 @@ class DonaturController extends Controller
         //di compact=> dengan membawa array divisi
     }
 
+    public function apiDonatur()
+    {
+         //digunakan untuk menampilkan data secara keseluruhan
+         $donatur = Donatur::all();
+         return response()->json(
+            [
+                'success'=> true,
+                'message'=>'Data Donatur',
+                'data'=>$donatur,
+            ],200 //200 kalau pesan atau api yang ditawarkan telah sukses
+        );
+        
+    }
+
+    public function apiDonaturDetail($id)
+    {
+         //Menampilkan data seorang pegawai        
+        $donatur = Donatur::find($id);
+        if($donatur)
+         {
+             return response()->json(
+                 [
+                     'success'=> true,
+                     'message'=>'Detail Donatur',
+                     'data'=>$donatur,
+                    ],200 //200 kalau pesan atau api yang ditawarkan telah sukses
+                );
+        }
+
+        else{
+            return response()->json(
+                [
+                    'success'=> false,
+                    'message'=>'Detail Donatur tidak ditemukan',
+                    'data'=>$donatur,
+                   ],404 //404 kalau pesan atau api yang ditawarkan tidak ditemukan
+               );
+        }
+    }
+
     /**
      * Show the form for creating a new resource.
      *
@@ -39,7 +79,7 @@ class DonaturController extends Controller
      */
     public function create()
     {
-        return view ('donatur.form');
+        return view('donatur.form');
     }
 
     /**
@@ -50,21 +90,23 @@ class DonaturController extends Controller
      */
     public function store(Request $request)
     {
-        $request->validate([
-            'nama' => 'required|unique:donatur|max:45',
-            'no_hp' => 'required',
-        ],
+        $request->validate(
+            [
+                'nama' => 'required|unique:donatur|max:45',
+                'no_hp' => 'required',
+            ],
 
-        [
-            'nama.required' => 'Nama Wajib diisi',
-            'nama.max' => 'Jumlah katakter maksimal 45',
-            'no_hp.required' => 'No Handphone Wajib diisi',
-        ]);
-      
+            [
+                'nama.required' => 'Nama Wajib diisi',
+                'nama.max' => 'Jumlah katakter maksimal 45',
+                'no_hp.required' => 'No Handphone Wajib diisi',
+            ]
+        );
+
         Donatur::create($request->all());
-       
+
         return redirect()->route('donatur.index')
-                        ->with('success','Donatur Berhasil Disimpan');
+            ->with('success', 'Donatur Berhasil Disimpan');
     }
 
     /**
@@ -105,17 +147,18 @@ class DonaturController extends Controller
             'nama' => 'required|max:45',
             'no_hp' => 'required',
         ]);
-      
-        DB::table('donatur')->where('id',$id)->update(
+
+        DB::table('donatur')->where('id', $id)->update(
             [
                 'nama' => $request->nama,
                 'no_hp' => $request->no_hp,
-                'updated_at'=>now(),
+                'updated_at' => now(),
 
-            ]);
-       
+            ]
+        );
+
         return redirect()->route('donatur.index')
-                        ->with('success','Donatur Berhasil Disimpan');
+            ->with('success', 'Donatur Berhasil Disimpan');
     }
 
     /**
@@ -129,14 +172,14 @@ class DonaturController extends Controller
         $row = Donatur::find($id);
         Donatur::where('id', $id)->delete();
         return redirect()->route('donatur.index')
-                        -> with('success', 'Data Donatur Berhasil dihapus');
+            ->with('success', 'Data Donatur Berhasil dihapus');
     }
 
     public function donaturPDF()
     {
-       $donatur = Donatur::all();
-       $pdf = PDF::loadView('donatur.donaturPDF', ['donatur'=>$donatur]);
-       return $pdf->download('data_donatur.pdf');
+        $donatur = Donatur::all();
+        $pdf = PDF::loadView('donatur.donaturPDF', ['donatur' => $donatur]);
+        return $pdf->download('data_donatur.pdf');
     }
 
     public function donaturExcel()
@@ -147,13 +190,13 @@ class DonaturController extends Controller
     public function cari(Request $request)
     {
         // menangkap data pencarian
-		$cari = $request->cari;
- 
-    		// mengambil data dari table pegawai sesuai pencarian data
-		$donatur = DB::table('donatur')
-		->where('nama','like',"%".$cari."%")
-        ->paginate();
-    		// mengirim data pegawai ke view index
+        $cari = $request->cari;
+
+        // mengambil data dari table pegawai sesuai pencarian data
+        $donatur = DB::table('donatur')
+            ->where('nama', 'like', "%" . $cari . "%")
+            ->paginate();
+        // mengirim data pegawai ke view index
         return view('donatur.index', compact('donatur'));
     }
 }

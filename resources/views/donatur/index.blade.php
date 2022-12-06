@@ -21,10 +21,10 @@
                             class="bi bi-file-plus-fill"></i>Tambah</a>
                     &nbsp;
                     <a class="btn btn-danger btn-sm" title="Export to PDF Donatur" href="{{url('donatur-pdf')}}"><i
-                            class="bi bi-filetype-pdf"></i></a>
+                            class="fas fa-file-pdf"></i></a>
                     &nbsp;
                     <a class="btn btn-success btn-sm" title="Export to Excel Donatur" href="{{url('donatur-excel')}}"><i
-                            class="bi bi-file-earmark-excel"></i></a>
+                            class="fas fa-file-excel"></i></a>
 
                 </div>
                 <div class="col-6">
@@ -70,16 +70,16 @@
                                         @method('DELETE')
                                         <a class="btn btn-info btn-sm" title="Detail Donatur"
                                             href="{{route('donatur.show', $row->id)}}">
-                                            <i class="bi bi-eye"></i>
+                                            <i class="fa fa-eye"></i>
                                         </a>
                                         <a class="btn btn-warning btn-sm" title="Ubah Donatur"
                                             href="{{route('donatur.edit', $row->id)}}">
-                                            <i class="bi bi-pencil-square"></i>
+                                            <i class="fas fa-pencil-alt"></i>
                                         </a>
                                         <button type="submit" class="btn btn-danger btn-sm btnHapus"
                                             title="Hapus Donatur" data-action="{{route('donatur.destroy', $row->id)}}"
                                             {{-- onclick="return confirm('Anda yakin data dihapus?')" --}}>
-                                            <i class="bi bi-trash-fill"></i>
+                                            <i class="fas fa-trash-alt"></i>
                                         </button>
                                     </form>
                             </td>
@@ -92,7 +92,7 @@
             Halaman : {{ $donatur->currentPage() }} <br />
             Jumlah Data : {{ $donatur->total() }} <br />
             Data Per Halaman : {{ $donatur->perPage() }} <br/>
-            {{--  {{ $donatur->links() }}  --}}
+             {{-- {{ $donatur->links() }}  --}}
         </div>
     </div>
 </div>

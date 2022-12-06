@@ -189,14 +189,21 @@
                     <a href="#" class="dropdown-toggle" data-toggle="dropdown">
                         <i class="feather icon-user"></i>
                     </a>
-                    <div class="dropdown-menu dropdown-menu-left profile-notification">
+                    <div class="dropdown-menu dropdown-menu-right profile-notification">
                         <div class="pro-head">
-                            <img src="{{ url ('admin/images/user/avatar-1.jpg') }}" class="img-radius"
-                                alt="User-Profile-Image">
-                            <span>John Doe</span>
-                            <a href="auth-signin.html" class="dud-logout" title="Logout">
+                            @empty(Auth::user()->foto)
+                                <img src="{{ url('admin/images/nophotos.png') }}" alt="Profile" class="img-radius">
+                            @else
+                                <img src="{{ url('admin/images')}}/{{Auth::user()->foto}}" alt="Profile" class="img-radius">
+                            @endempty
+                            <span>{{ Auth::user()->nama }}</span>
+                            <a href="{{ route('logout') }}" class="dud-logout" title="Logout" 
+                            onclick="event.preventDefault(); document.getElementById('logout-form').submit();">
                                 <i class="feather icon-log-out"></i>
                             </a>
+                            <form id="logout-form" action="{{ route('logout') }}" method="POST" class="d-none">
+                                @csrf
+                            </form>
                         </div>
                         <ul class="pro-body">
                             <li><a href="user-profile.html" class="dropdown-item"><i class="feather icon-user"></i>

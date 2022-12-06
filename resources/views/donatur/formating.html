@@ -1,65 +1,82 @@
-@extends('landingpage.index')
+@extends('admin.index')
 @section('content')
-<div class="card shadow mb-4">
-    <div class="card-header py-3">
-        <h6 class="m-0 font-weight-bold text-success">Data Anak Asuh</h6>
+<div class="col-md-12">
+    <h5 class="mt-5">Form donasi</h5>
+    <hr>
+    {{-- @if($errors->any())
+    <div class="alert alert-danger">
+        <strong>Whoops!</strong> Terjadi kesalahann saat Input data<br>
+        <ul>
+            @foreach ($errors->all() as $error)
+            <li>{{$error}}</li>
+            @endforeach
+        </ul>
     </div>
-    <div class="row">
-        <div class="col-6">
-            <a class="btn btn-info btn-sm ml-4" title="Tambah Donatur" href="{{route('donatur.create')}}"><i
-                    class="bi bi-file-plus-fill"></i>Tambah</a>
-            &nbsp;
-            <a class="btn btn-danger btn-sm" title="Export to PDF Donatur" href="{{url('donatur-pdf')}}"><i
-                    class="bi bi-filetype-pdf"></i></a>
-            &nbsp;
-            <a class="btn btn-success btn-sm" title="Export to Excel Donatur" href="{{url('donatur-excel')}}"><i
-                    class="bi bi-file-earmark-excel"></i></a>
-
+    @endif --}}
+    <form method="POST" action="{{route('donasi.store')}}">
+        @csrf
+        <div class="form-group row">
+            <label for="nama" class="col-sm-3 col-form-label">Keterangan</label>
+            <div class="col-sm-9">
+                <textarea class="form-control" name="alamat" style="height: 100px">{{old('keterangan')}}</textarea>
+                @error('keterangan')
+                <div class="invalid-feedback">
+                    {{$message}}
+                </div>
+                @enderror
+            </div>
         </div>
-        <div class="col-6">
-            {{-- <form action="{{url('donatur-cari')}}" method="GET" class="mr-2">
-                <input type="text" name="cari" placeholder="Cari Donatur .." value="{{ old('cari') }}">
-                <input type="submit" value="Cari" class="bg-success">
-            </form>
-        </div> --}}
 
-        <nav class="justify-content-between mr-4" style="width: 70%">
-            <form class="form-inline" action="{{url('donatur-cari')}}" method="GET">
-                <input class="form-control mr-sm-2 form-sm" type="text" name="cari" placeholder="Search"
-                    aria-label="Search" value="{{ old('cari') }}">
-                <input class="btn btn-outline-success" type="submit" value="Cari">
-            </form>
-        </nav>
-    </div>
-    <div class="card-body">
-        <div class="table-responsive">
-            <table class="table table-bordered" id="dataTable" width="70%" cellspacing="0">
-                <thead>
-                    <tr>
-                        <th>No</th>
-                        <th>Nama</th>
-                        <th>Tempat Lahir</th>
-                        <th>Tanggal Lahir</th>
-                        <th>Gender</th>
-                        <th>Pendidikan</th>
-                    </tr>
-                </thead>
-                <tbody>
-                    @php $no= 1; @endphp
-                    @foreach ($anak_asuh as $row)
-                    <tr>
-                        <td>{{ $no++ }}</td>
-                        <td>{{ $row->nama }}</td>
-                        <td>{{ $row->tmp_lahir }}</td>
-                        <td>{{ $row->tgl_lahir }}</td>
-                        <td>{{ $row->gender }}</td>
-                        <td>{{ $row->pendidikan }}</td>
-                    </tr>
+        <div class="form-group row">
+            <label for="nama" class="col-sm-3 col-form-label">Tanggal Donasi</label>
+            <div class="col-sm-9">
+                <input type="date" class="form-control @error('tgl_donasi') is-invalid @enderror" name="tgl_donasi"
+                    value="{{old('tgl_donasi')}}" placeholder="Tanggal donasi">
+                @error('tgl_donasi')
+                <div class="invalid-feedback">
+                    {{$message}}
+                </div>
+                @enderror
+            </div>
+        </div>
+
+        <div class="form-group row">
+            <label for="nama" class="col-sm-3 col-form-label">Jumlah Donasi</label>
+            <div class="col-sm-9">
+                <input type="text" class="form-control @error('jml_donasi') is-invalid @enderror" name="jml_donasi"
+                    value="{{old('jml_donasi')}}" placeholder="Jumlah donasi">
+                @error('jml_donasi')
+                <div class="invalid-feedback">
+                    {{$message}}
+                </div>
+                @enderror
+            </div>
+        </div>
+
+        <div class="form-group row">
+            <label for="nama" class="col-sm-3 col-form-label">Donatur</label>
+            <div class="col-sm-10">
+                <select class="form-select @error('donatur_id') is-invalid @enderror" name="donatur_id">
+                    <option selected>-- Pilih Donatur --</option>
+                    @foreach($ar_donatur as $don)
+                    @php
+                    $sel = (old('donatur_id') == $don->id)? 'selected':'';
+                    @endphp
+                    <option value="{{ $don->id }}" {{ $sel }}>{{ $don->nama }}</option>
                     @endforeach
-                </tbody>
-            </table>
+                </select>
+                @error('donatur_id')
+                <div class="invalid-feedback">
+                    {{ $message }}
+                </div>
+                @enderror
+            </div>
         </div>
-    </div>
-</div>
+
+        <div class="text-left">
+            <button type="submit" class="btn btn-success">Simpan</button>
+            <a class="btn btn-secondary" href="{{url('donasi')}}">Cancel</a>
+        </div>
+    </form>
 </div>
 @endsection

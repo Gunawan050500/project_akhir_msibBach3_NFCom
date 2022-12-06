@@ -19,10 +19,10 @@
                             class="bi bi-file-plus-fill"></i>Tambah</a> 
                     &nbsp;
                     <a class="btn btn-danger btn-sm" title="Export to PDF Kategori Kegiatan" href="{{url('kategori_kegiatan-pdf')}}"><i
-                            class="bi bi-filetype-pdf"></i></a>
+                            class="fas fa-file-pdf"></i></a>
                     &nbsp;
                     <a class="btn btn-success btn-sm" title="Export to Excel Kategori Kegiatan" href="{{url('kategori_kegiatan-excel')}}"><i
-                            class="bi bi-file-earmark-excel"></i></a>
+                            class="fas fa-file-excel"></i></a>
 
                 </div>
                 <div class="col-6">
@@ -66,16 +66,16 @@
                                         @method('DELETE')
                                         <a class="btn btn-info btn-sm" title="Detail Kategori Kegiatan"
                                             href="{{route('kategori_kegiatan.show', $row->id)}}">
-                                            <i class="bi bi-eye"></i>
+                                            <i class="fa fa-eye"></i>
                                         </a>
                                         <a class="btn btn-warning btn-sm" title="Ubah Kategori Kegiatan"
                                             href="{{route('kategori_kegiatan.edit', $row->id)}}">
-                                            <i class="bi bi-pencil-square"></i>
+                                            <i class="fas fa-pencil-alt"></i>
                                         </a>
                                         <button type="submit" class="btn btn-danger btn-sm btnHapus"
                                             title="Hapus Kategori Kegiatan" data-action="{{route('kategori_kegiatan.destroy', $row->id)}}"
                                             {{-- onclick="return confirm('Anda yakin data dihapus?')" --}}>
-                                            <i class="bi bi-trash-fill"></i>
+                                            <i class="fas fa-trash-alt"></i>
                                         </button>
                                     </form>
                             </td>

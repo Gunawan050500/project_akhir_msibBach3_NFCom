@@ -4,14 +4,14 @@ namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
 use App\Models\Kategori_Kegiatan;
-use DB;
-use PDF;
+use Illuminate\Support\Facades\DB;
+use Barryvdh\DomPDF\Facade\Pdf;
 //ini extension data koneksinya
 use App\Exports\Kategori_KegiatanExport;
 // //ini yang vendor excellnya
 use Maatwebsite\Excel\Facades\Excel;
 //ini bagian untuk sweetaler
-use Alert;
+use RealRashid\SweetAlert\Facades\Alert;
 
 class Kategori_KegiatanController extends Controller
 {
@@ -27,6 +27,46 @@ class Kategori_KegiatanController extends Controller
         return view('kategori_kegiatan.index', compact('kategori_kegiatan'));
     }
 
+    public function apiKategori_Kegiatan()
+    {
+         //digunakan untuk menampilkan data secara keseluruhan
+         $kategori_kegiatan = Kategori_Kegiatan::all();
+         return response()->json(
+            [
+                'success'=> true,
+                'message'=>'Data Kategori Kegiatan',
+                'data'=>$kategori_kegiatan,
+            ],200 //200 kalau pesan atau api yang ditawarkan telah sukses
+        );
+        
+    }
+
+    public function apiKategori_KegiatanDetail($id)
+    {
+         //Menampilkan data seorang pegawai        
+        $kategori_kegiatan = Kategori_Kegiatan::find($id);
+        if($kategori_kegiatan)
+         {
+             return response()->json(
+                 [
+                     'success'=> true,
+                     'message'=>'Detail Kategori Kegiatan',
+                     'data'=>$kategori_kegiatan,
+                    ],200 //200 kalau pesan atau api yang ditawarkan telah sukses
+                );
+        }
+
+        else{
+            return response()->json(
+                [
+                    'success'=> false,
+                    'message'=>'Detail Kategori Kegiatan tidak ditemukan',
+                    'data'=>$kategori_kegiatan,
+                   ],404 //404 kalau pesan atau api yang ditawarkan tidak ditemukan
+               );
+        }
+    }
+
     /**
      * Show the form for creating a new resource.
      *
@@ -34,7 +74,7 @@ class Kategori_KegiatanController extends Controller
      */
     public function create()
     {
-        return view ('kategori_kegiatan.form');
+        return view('kategori_kegiatan.form');
     }
 
     /**
@@ -45,19 +85,21 @@ class Kategori_KegiatanController extends Controller
      */
     public function store(Request $request)
     {
-        $request->validate([
-            'nama' => 'required|unique:kategori_kegiatan|max:45',
-        ],
+        $request->validate(
+            [
+                'nama' => 'required|unique:kategori_kegiatan|max:45',
+            ],
 
-        [
-            'nama.required' => 'Nama Wajib diisi',
-            'nama.max' => 'Jumlah katakter maksimal 45',
-        ]);
-      
+            [
+                'nama.required' => 'Nama Wajib diisi',
+                'nama.max' => 'Jumlah katakter maksimal 45',
+            ]
+        );
+
         Kategori_Kegiatan::create($request->all());
-       
+
         return redirect()->route('kategori_kegiatan.index')
-                        ->with('success','Kategori Kegiatan Berhasil Disimpan');
+            ->with('success', 'Kategori Kegiatan Berhasil Disimpan');
     }
 
     /**
@@ -97,16 +139,17 @@ class Kategori_KegiatanController extends Controller
         $request->validate([
             'nama' => 'required|max:45',
         ]);
-      
-        DB::table('kategori_kegiatan')->where('id',$id)->update(
+
+        DB::table('kategori_kegiatan')->where('id', $id)->update(
             [
                 'nama' => $request->nama,
-                'updated_at'=>now(),
+                'updated_at' => now(),
 
-            ]);
-       
+            ]
+        );
+
         return redirect()->route('kategori_kegiatan.index')
-                        ->with('success','Kategori_Kegiatan Berhasil Disimpan');
+            ->with('success', 'Kategori_Kegiatan Berhasil Disimpan');
     }
 
     /**
@@ -120,14 +163,14 @@ class Kategori_KegiatanController extends Controller
         $row = Kategori_Kegiatan::find($id);
         Kategori_Kegiatan::where('id', $id)->delete();
         return redirect()->route('kategori_kegiatan.index')
-                        -> with('success', 'Data Kategori_Kegiatan Berhasil dihapus');
+            ->with('success', 'Data Kategori_Kegiatan Berhasil dihapus');
     }
 
     public function kategori_kegiatanPDF()
     {
-       $kategori_kegiatan = Kategori_Kegiatan::all();
-       $pdf = PDF::loadView('kategori_kegiatan.kategori_kegiatanPDF', ['kategori_kegiatan'=>$kategori_kegiatan]);
-       return $pdf->download('data_kategori_kegiatan.pdf');
+        $kategori_kegiatan = Kategori_Kegiatan::all();
+        $pdf = PDF::loadView('kategori_kegiatan.kategori_kegiatanPDF', ['kategori_kegiatan' => $kategori_kegiatan]);
+        return $pdf->download('data_kategori_kegiatan.pdf');
     }
 
     public function kategori_kegiatanExcel()
@@ -138,14 +181,13 @@ class Kategori_KegiatanController extends Controller
     public function cari(Request $request)
     {
         // menangkap data pencarian
-		$cari = $request->cari;
- 
-    		// mengambil data dari table pegawai sesuai pencarian data
-		$kategori_kegiatan = DB::table('kategori_kegiatan')
-		->where('nama','like',"%".$cari."%")
-        ->paginate();
-    		// mengirim data pegawai ke view index
+        $cari = $request->cari;
+
+        // mengambil data dari table pegawai sesuai pencarian data
+        $kategori_kegiatan = DB::table('kategori_kegiatan')
+            ->where('nama', 'like', "%" . $cari . "%")
+            ->paginate();
+        // mengirim data pegawai ke view index
         return view('kategori_kegiatan.index', compact('kategori_kegiatan'));
     }
 }
-
