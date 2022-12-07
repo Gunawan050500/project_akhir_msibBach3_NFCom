@@ -40,13 +40,13 @@
         <div class="card-body">
 
             <div class="table-responsive">
-                <table class="table table-bordered" id="dataTable" width="100%" cellspacing="0">
+                <table class="table table-bordered" id="dataTable" width="80%" cellspacing="0">
                     <thead>
                         <tr>
                             <th>No</th>
                             <th>Nama</th>
                             <th>Tanggal Kegiatan</th>
-                            <th>Deskripsi</th>
+                            <th >Deskripsi</th>
                             <th>Kategori Kegiatan</th>
                             <th>Foto</th>
                             <th>Aksi</th>
@@ -60,7 +60,7 @@
                             <td>{{ $row->nama }}</td>
                             <td>{{ $row->tgl_kegiatan }}</td>
                             <td>{{ $row->deskripsi }}</td>
-                            <td>{{ $row->kategori_id}}</td>
+                            <td>{{ $row->kategori->nama}}</td>
                             <td width="10%">
                                 @empty($row->foto)
                                 <img src="{{url('admin/images/nophotos.png')}}" alt="Profile" class="rounded-circle" width="30px">

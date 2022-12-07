@@ -11,9 +11,9 @@ class Kegiatan extends Model
     //mapping ke tabel
     protected $table = 'kegiatan';
     //mapping ke kolom/fieldnya
-    protected $fillable = ['nama', 'tgl_kegiatan', 'deskripsi', 'kategori_id', 'foto',];
+    protected $fillable = ['nama', 'tgl_kegiatan', 'deskripsi', 'kategori_id', 'foto'];
     //tabel relasi merujuk/merefer ke tabel master (donatur)
-    public function kategori_kegiatan()
+    public function kategori()
     {
         return $this->belongsTo(Kategori_Kegiatan::class);
     }

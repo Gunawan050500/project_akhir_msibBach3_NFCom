@@ -52,7 +52,7 @@ class KegiatanController extends Controller
                 'nama' => 'required|max:45',
                 'tgl_kegiatan' => 'required',
                 'deskripsi' => 'required',
-                'kategori_id' => 'required',
+                'kategori_id' => 'required|integer:45',
                 'foto' => 'nullable|image|mimes:jpg,jpeg,png,gift,svg|max:2048',
             ],
 
@@ -62,6 +62,7 @@ class KegiatanController extends Controller
                 'tgl_kegiatan.required' => 'Tanggal Kegiatan Wajib diisi',
                 'deskripsi.required' => 'Deskripsi Kegiatan Wajib diisi',
                 'kategori_id.required' => 'Kategori Kegiatan Wajib diisi',
+                'kategori_id.integer' => 'Kategori Kegiatan Wajib diisi sesuai dengan yang tersedia di dalam pilihan',
                 'foto.mimes' => 'Foto harus berupa jpg, png, girf, svg',
                 'foto.max' => 'Ukuran foto maksimal 2048 KB',
             ]
@@ -70,7 +71,7 @@ class KegiatanController extends Controller
         //apakah user inin upload foto
         if(!empty($request->foto)){
             //$fileName = $request->foto->getClientOriginal
-            $fileName = 'foto-'.$request->nip.'.'.$request->foto->extension();
+            $fileName = 'foto-'.$request->nama.'.'.$request->foto->extension();
             //Ini figunakan untuk meletakkan fotonya di mana
             $request->foto->move(public_path('admin/img'),$fileName);
 
@@ -147,7 +148,7 @@ class KegiatanController extends Controller
             //jika ada foto lama, hapus foto lamanya terlebih dahulu
             if(!empty($row->foto)) unlink('admin/img/'.$row->foto);
             //proses foto lama ganti foto baru
-            $fileName = 'foto-'.$request->nip.'.'.$request->foto->extension();
+            $fileName = 'foto-'.$request->nama.'.'.$request->foto->extension();
             //$fileName = $request->foto->getClientOriginalName();
             $request->foto->move(public_path('admin/img'),$fileName);
         }

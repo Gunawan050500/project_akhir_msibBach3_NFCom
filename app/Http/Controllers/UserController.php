@@ -76,7 +76,7 @@ class UserController extends Controller
         //apakah user inin upload foto
         if (!empty($request->foto)) {
             //$fileName = $request->foto->getClientOriginal
-            $fileName = 'foto-' . $request->nip . '.' . $request->foto->extension();
+            $fileName = 'foto-' . $request->email. '.' . $request->foto->extension();
             //Ini figunakan untuk meletakkan fotonya di mana
             $request->foto->move(public_path('admin/images'), $fileName);
         } else {
@@ -150,7 +150,7 @@ class UserController extends Controller
         //apakah user inin upload foto
         if (!empty($request->foto)) {
             //$fileName = $request->foto->getClientOriginal
-            $fileName = 'foto-' . $request->nip . '.' . $request->foto->extension();
+            $fileName = 'foto-' . $request->email. '.' . $request->foto->extension();
             //Ini figunakan untuk meletakkan fotonya di mana
             $request->foto->move(public_path('admin/images'), $fileName);
         } else {

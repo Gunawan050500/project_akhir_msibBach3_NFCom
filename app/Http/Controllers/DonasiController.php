@@ -53,7 +53,7 @@ class DonasiController extends Controller
                 'keterangan' => 'required|string|max:150',
                 'tgl_donasi' => 'required',
                 'jml_donasi' => 'required',
-                'donatur_id' => 'required',
+                'donatur_id' => 'required|integer:45',
             ],
 
             [
@@ -61,6 +61,7 @@ class DonasiController extends Controller
                 'tgl_donasi.required' => 'Tanggal Donasi Wajib diisi',
                 'jml_donasi.required' => 'Jumlah Donasi Wajib diisi',
                 'donatur_id.required' => 'Kategori Kegiatan Wajib diisi',
+                'donatur_id.integer' => 'Donatur Wajib diisi sesuai dengan yang tersedia di dalam pilihan',
             ]
         );
 
@@ -120,6 +121,7 @@ class DonasiController extends Controller
             'tgl_donasi' => 'required',
             'jml_donasi' => 'required',
             'donatur_id' => 'required',
+            
         ]);
 
         DB::table('donasi')->where('id', $id)->update(

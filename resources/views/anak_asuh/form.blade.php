@@ -88,9 +88,9 @@
                     <input type="file" class="form-control" name="foto">
                 </div>
             </div>
-            <div class="text-center">
+            <div class="text-left">
                 <button type="submit" class="btn btn-success">Simpan</button>
-                <button type="reset" class="btn btn-secondary" href="{{ url('anak_asuh') }}">Batal</button>
+                <a type="reset" class="btn btn-secondary" href="{{ url('anak_asuh') }}">Cancel</a>
             </div>
         </form>
     </div>

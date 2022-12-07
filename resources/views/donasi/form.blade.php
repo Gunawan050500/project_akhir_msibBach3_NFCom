@@ -3,7 +3,7 @@
 <div class="col-md-12">
     <h5 class="mt-5">Form donasi</h5>
     <hr>
-    {{-- @if($errors->any())
+    {{--  @if($errors->any())
     <div class="alert alert-danger">
         <strong>Whoops!</strong> Terjadi kesalahann saat Input data<br>
         <ul>
@@ -12,13 +12,13 @@
             @endforeach
         </ul>
     </div>
-    @endif --}}
+    @endif  --}}
     <form method="POST" action="{{route('donasi.store')}}">
         @csrf
         <div class="form-group row">
             <label for="nama" class="col-sm-3 col-form-label">Keterangan</label>
             <div class="col-sm-9">
-                <textarea class="form-control" name="keterangan" style="height: 100px">{{old('keterangan')}}</textarea>
+                <textarea class="form-control @error('keterangan') is-invalid @enderror" name="keterangan" style="height: 100px">{{old('keterangan')}}</textarea>
                 @error('keterangan')
                 <div class="invalid-feedback">
                     {{$message}}
@@ -55,9 +55,9 @@
 
         <div class="form-group row">
             <label for="nama" class="col-sm-3 col-form-label">Donatur</label>
-            <div class="col-sm-10">
+            <div class="col-sm-5">
                 <select class="form-select @error('donatur_id') is-invalid @enderror" name="donatur_id">
-                    <option selected>-- Pilih Donatur --</option>
+                    <option selected class="text-center">-- Pilih Donatur --</option>
                     @foreach($ar_donatur as $don)
                     @php
                     $sel = (old('donatur_id') == $don->id)? 'selected':'';

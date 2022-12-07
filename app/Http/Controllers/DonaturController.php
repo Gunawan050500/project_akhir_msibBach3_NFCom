@@ -14,7 +14,7 @@ use Maatwebsite\Excel\Facades\Excel;
 use RealRashid\SweetAlert\Facades\Alert;
 
 //tutorial untuk pagination
-https: //www.malasngoding.com/
+// https: //www.malasngoding.com/
 
 class DonaturController extends Controller
 {

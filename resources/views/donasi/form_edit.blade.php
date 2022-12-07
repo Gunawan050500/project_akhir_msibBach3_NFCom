@@ -43,7 +43,7 @@ $ar_kategori = App\Models\Kategori_Kegiatan::all();
             <label class="col-sm-3 col-form-label">Donatur</label>
             <div class="col-sm-5">
                 <select class="form-select" name="donatur_id">
-                    <option selected>-- Pilih Donatur --</option>
+                    <option selected class="text-center">-- Pilih Donatur --</option>
                     @foreach($ar_donatur as $don)
                     @php $sel = ($don->id == $row->donatur_id) ? 'selected' : ''; @endphp
                     <option value="{{ $don->id }}" {{ $sel }}>{{ $don->nama }}</option>

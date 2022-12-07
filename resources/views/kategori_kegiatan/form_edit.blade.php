@@ -22,7 +22,7 @@
                     <input type="text" class="form-control" name="nama" value="{{$row->nama}}" placeholder="Nama kegiatan">
                 </div>
             </div>
-            <div class="text-center">
+            <div class="text-left">
                 <button type="submit" class="btn btn-success">Ubah</button>
                 <a class="btn btn-secondary" href="{{url('kategori_kegiatan')}}">Cancel</a>
             </div>

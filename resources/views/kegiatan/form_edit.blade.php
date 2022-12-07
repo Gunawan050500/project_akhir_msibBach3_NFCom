@@ -44,7 +44,7 @@ $ar_kategori = App\Models\Kategori_Kegiatan::all();
             <label class="col-sm-3 col-form-label">Kategori Kegiatan</label>
             <div class="col-sm-5">
                 <select class="form-select" name="kategori_id">
-                    <option selected>-- Pilih Kategori Kegiatan --</option>
+                    <option selected class="text-center">-- Pilih Kategori Kegiatan --</option>
                     @foreach($ar_kategori as $kat)
                     @php $sel = ($kat->id == $row->kategori_id) ? 'selected' : ''; @endphp
                     <option value="{{ $kat->id }}" {{ $sel }}>{{ $kat->nama }}</option>
@@ -64,7 +64,7 @@ $ar_kategori = App\Models\Kategori_Kegiatan::all();
             </div>
         </div>
 
-        <div class="text-center">
+        <div class="text-left">
             <button type="submit" class="btn btn-success">Ubah</button>
             <a class="btn btn-secondary" href="{{url('kegiatan')}}">Cancel</a>
         </div>

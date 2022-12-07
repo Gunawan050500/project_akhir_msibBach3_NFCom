@@ -3,7 +3,7 @@
 <div class="col-md-12">
     <h5 class="mt-5">Form Kegiatan</h5>
     <hr>
-    {{-- @if($errors->any())
+    {{--  @if($errors->any())
     <div class="alert alert-danger">
         <strong>Whoops!</strong> Terjadi kesalahann saat Input data<br>
         <ul>
@@ -12,7 +12,7 @@
             @endforeach
         </ul>
     </div>
-    @endif --}}
+    @endif  --}}
     <form method="POST" action="{{route('kegiatan.store')}}" enctype="multipart/form-data">
         @csrf
         <div class="form-group row">
@@ -44,7 +44,7 @@
         <div class="form-group row">
             <label for="nama" class="col-sm-3 col-form-label">Deskripsi Kegiatan</label>
             <div class="col-sm-9">
-                <textarea class="form-control" name="deskripsi" style="height: 100px">{{old('deskripsi')}}</textarea>
+                <textarea class="form-control @error('deskripsi') is-invalid @enderror" name="deskripsi" style="height: 100px">{{old('deskripsi')}}</textarea>
                 @error('deskripsi')
                 <div class="invalid-feedback">
                     {{$message}}
@@ -57,7 +57,7 @@
             <label for="nama" class="col-sm-3 col-form-label">Kategori Kegiatan</label>
             <div class="col-sm-5">
                 <select class="form-select @error('kategori_id') is-invalid @enderror" name="kategori_id">
-                    <option selected>-- Pilih Kategori --</option>
+                    <option selected class="text-center">-- Pilih Kategori --</option>
                     @foreach($ar_kategori as $kat)
                     @php
                     $sel = (old('kategori_id') == $kat->id)? 'selected':'';
@@ -74,12 +74,11 @@
         </div>
 
         <div class="form-group row my-3">
-            <label for="inputNumber" class="col-sm-2 col-form-label">Foto</label>
+            <label for="inputNumber" class="col-sm-3 col-form-label">Foto</label>
             <div class="col-sm-5">
                 <input class="form-control" type="file" name="foto">
             </div>
         </div>
-
         <div class="text-left">
             <button type="submit" class="btn btn-success">Simpan</button>
             <a class="btn btn-secondary" href="{{url('kegiatan')}}">Cancel</a>
