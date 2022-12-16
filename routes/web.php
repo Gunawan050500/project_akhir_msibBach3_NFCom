@@ -143,10 +143,10 @@ Route::controller(GoogleController::class)->group(function(){
 
 
 //ini route untuk detail user yang sedang login
-Route::get('/profile', function () {
-    return view('profile.indexsatu');
-});
+// Route::get('/profile', function () {
+//     return view('profile.indexsatu');
+// });
 
-Route::get('profile-index/{id}', [ProfileController::class, 'index'])->name('profile.index');
-Route::get('profile-edit/{id}', [ProfileController::class, 'edit'])->name('profile.edit');
-Route::get('profile-update/{id}', [ProfileController::class, 'update'])->name('profile.update');
+// Route::get('profile-index/{id}', [ProfileController::class, 'index'])->name('profile.index');
+// Route::get('profile-edit/{id}', [ProfileController::class, 'edit'])->name('profile.edit');
+// Route::get('profile-update/{id}', [ProfileController::class, 'update'])->name('profile.update');
