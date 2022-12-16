@@ -189,7 +189,7 @@
                     <a href="#" class="dropdown-toggle" data-toggle="dropdown">
                         <i class="feather icon-user"></i>
                     </a>
-                    <div class="dropdown-menu dropdown-menu-right profile-notification">
+                    <div class="dropdown-menu dropdown-menu-left profile-notification">
                         <div class="pro-head">
                             @empty(Auth::user()->foto)
                                 <img src="{{ url('admin/images/nophotos.png') }}" alt="Profile" class="img-radius">
@@ -206,7 +206,7 @@
                             </form>
                         </div>
                         <ul class="pro-body">
-                            <li><a href="user-profile.html" class="dropdown-item"><i class="feather icon-user"></i>
+                            <li><a href="{{ url('/profile') }}" class="dropdown-item"><i class="feather icon-user"></i>
                                     Profile</a></li>
                             <li><a href="email_inbox.html" class="dropdown-item"><i class="feather icon-mail"></i> My
                                     Messages</a></li>

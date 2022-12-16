@@ -12,6 +12,9 @@ use App\Http\Controllers\KegiatanController;
 use App\Http\Controllers\Data_anakController;
 use App\Http\Controllers\Data_strukturController;
 use App\Http\Controllers\Data_kegiatanController;
+use App\Http\Controllers\GoogleController;
+use App\Http\Controllers\DashboardController;
+use App\Http\Controllers\ProfileController;
 
 /*
 |--------------------------------------------------------------------------
@@ -48,12 +51,20 @@ Route::get('/Donasi', function () {
     return view('landingpage.donasi');
 });
 
+
+//ini untuk tampilan dashboardnya
+// Route::get('/dashboardcount', function () {
+//     return view('dashboard.index');
+// });
+
 Route::resource('user', UserController::class);
 Route::resource('anak_asuh', Anak_asuhController::class);
 Route::resource('donatur', DonaturController::class);
 Route::resource('donasi', DonasiController::class);
 Route::resource('kategori_kegiatan', Kategori_KegiatanController::class);
 Route::resource('kegiatan', KegiatanController::class);
+
+// Route::get('kegiatandua', Data_kegiatanController::class, 'tampil');
 
 //bagian anak_asuh
 Route::get('anak_asuh-edit/{id}', [Anak_asuhController::class, 'edit']);
@@ -71,6 +82,8 @@ Route::get('donatur-pdf', [DonaturController::class, 'donaturPDF']);
 Route::get('donatur-excel', [DonaturController::class, 'donaturExcel']);
 Route::get('donatur-edit/{id}', [DonaturController::class, 'edit']);
 
+
+
 //bagian donasi
 Route::get('donasi-pdf', [DonasiController::class, 'donasiPDF']);
 Route::get('donasi-excel', [DonasiController::class, 'donasiExcel']);
@@ -80,7 +93,7 @@ Route::get('donasi-edit/{id}', [DonasiController::class, 'edit']);
 Route::get('user-pdf', [UserController::class, 'userPDF']);
 Route::get('user-excel', [UserController::class, 'userExcel']);
 Route::get('user-edit/{id}', [UserController::class, 'edit']);
-Route::get('dashboard', [DashboardController::class, 'index']);
+Route::get('dashboardcount', [DashboardController::class, 'index']);
 
 
 //bagian kategori kegiatan
@@ -114,4 +127,26 @@ Route::get('/api-donatur/{id}', [DonaturController::class, 'apiDonaturDetail']);
 Route::get('/api-kategori_kegiatan', [Kategori_KegiatanController::class, 'apiKategori_Kegiatan']);
 Route::get('/api-kategori_kegiatan/{id}', [Kategori_KegiatanController::class, 'apiKategori_KegiatanDetail']);
 
+//ini untuk update profile pada data user secara pribadi
+Route::get('user-ubah', [UserController::class, 'userPDF']);
 
+//ini untuk login menggunakan google
+Route::middleware(['auth:sanctum', 'verified'])->get('/dashboard', function () {
+    return view('dashboard');
+})->name('dashboard');
+
+//ini route untuk login menggunakan google
+Route::controller(GoogleController::class)->group(function(){
+    Route::get('auth/google', 'redirectToGoogle')->name('auth.google');
+    Route::get('auth/google/callback', 'handleGoogleCallback');
+});
+
+
+//ini route untuk detail user yang sedang login
+Route::get('/profile', function () {
+    return view('profile.indexsatu');
+});
+
+Route::get('profile-index/{id}', [ProfileController::class, 'index'])->name('profile.index');
+Route::get('profile-edit/{id}', [ProfileController::class, 'edit'])->name('profile.edit');
+Route::get('profile-update/{id}', [ProfileController::class, 'update'])->name('profile.update');

@@ -34,6 +34,7 @@
     {{--  MDB  --}}
     <link href="https://cdnjs.cloudflare.com/ajax/libs/mdb-ui-kit/6.0.1/mdb.min.css"
     rel="stylesheet"/>
+
     @livewireStyles
 </head>
 <body class="">
@@ -98,6 +99,10 @@
 
 <!-- custom-chart js -->
 <script src="{{ asset ('admin/js/pages/dashboard-main.js') }}"></script>
+
+{{--  Tambahan js untuk membuat dashboard  --}}
+  <script src="{{ asset('admin/vendor/chart.js/chart.min.js')}}"></script> 
+    
 @livewireScripts
 </body>
 

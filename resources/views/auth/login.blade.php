@@ -33,9 +33,15 @@
 							<label class="custom-control-label" for="customCheck1">Remember me.</label>
 						</div>
 						<button class="btn btn-primary btn-block mb-4">Sign In</button>
-						<hr>
-						<p class="mb-2">Don't have an account? <a href="{{ route('register') }}" class="f-w-400">Sign up</a></p>
+                        <div class="flex items-center justify-end align-middle ">
+                <a href="{{ route('auth.google') }}">
+                    <img src="https://developers.google.com/identity/images/btn_google_signin_dark_normal_web.png" style="margin-left: 3em;">
+                </a>
+            </div>
+						<p class="mb-2">Dont have an account? <a href="{{ route('register') }}" class="f-w-400">Sign up</a></p>
                         </form>
+
+                        
 					</div>
 				</div>
 			</div>

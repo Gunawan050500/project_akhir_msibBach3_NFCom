@@ -171,7 +171,7 @@ class DonasiController extends Controller
         $cari = $request->cari;
 
         // mengambil data dari table pegawai sesuai pencarian data
-        $kegiatan = DB::table('donasi')
+        $donasi = DB::table('donasi')
             ->where('keterangan', 'like', "%" . $cari . "%")
             ->paginate();
         // mengirim data pegawai ke view index

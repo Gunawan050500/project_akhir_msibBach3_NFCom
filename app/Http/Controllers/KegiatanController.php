@@ -206,10 +206,11 @@ class KegiatanController extends Controller
         $cari = $request->cari;
 
         // mengambil data dari table pegawai sesuai pencarian data
+        $ar_kategori = Kategori_Kegiatan::all();
         $kegiatan = DB::table('kegiatan')
             ->where('nama', 'like', "%" . $cari . "%")
             ->paginate();
         // mengirim data pegawai ke view index
-        return view('kegiatan.index', compact('kegiatan'));
+        return view('kegiatan.index', compact('kegiatan', 'ar_kategori'));
     }
 }
