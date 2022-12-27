@@ -7,7 +7,7 @@
         <div class="card mb-4">
           <div class="card-body text-center">
             @empty($row->foto)
-              <img src="{{url('admin/images/no_photo.png')}}" alt="Profile" class="rounded-circle" style="width:40%; margin-top: 10%; margin-left: 20%">
+              <img src="{{url('admin/images/nophotos.png')}}" alt="Profile" class="rounded-circle" style="width:40%; margin-top: 10%">
             @else
               <img src="{{url('admin/images')}}/{{$row->foto}}" alt="Profile" class="rounded-circle" style="width:40%; margin-top: 10%">
             @endempty
@@ -41,19 +41,10 @@
             <hr>
             <div class="row">
               <div class="col-sm-3">
-                <p class="mb-0">Password</p>
+                <p class="mb-0">Jabatan</p>
               </div>
               <div class="col-sm-9">
-                <p class="text-muted mb-0">{{ $row->password }}</p>
-              </div>
-            </div>
-            <hr>
-            <div class="row">
-              <div class="col-sm-3">
-                <p class="mb-0">Role</p>
-              </div>
-              <div class="col-sm-9">
-                <p class="text-muted mb-0">{{ $row->role }}</p>
+                <p class="text-muted mb-0">{{ $row->status }}</p>
               </div>
             </div>
             <hr>

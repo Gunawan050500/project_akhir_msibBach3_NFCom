@@ -10,6 +10,8 @@
 
     <title>Rumah | Yatim</title>
 
+    <link href="{{url('landingpage/images/logo.png')}}" rel="shortcut icon">
+
     <!-- CSS FILES -->
     <link href="{{ asset ('landingpage/css/bootstrap.min.css') }}" rel="stylesheet">
 
@@ -49,18 +51,23 @@ https://templatemo.com/tm-581-kind-heart-charity
 
                 <div class="col-lg-3 col-12 ms-auto d-lg-block d-none">
                     <ul class="social-icon">
+                    @guest
+                        @if (Route::has('login'))
                         <li class="social-icon-item">
-                            <a href="{{ url('/login') }}" class="social-icon-link bi-login">Login</a>
+                            <a class="social-icon-link bi-login" href="{{ route('login') }}">{{ __('Login') }}</a>
                         </li>
-                        {{-- <li class="social-icon-item">
-                        <a href="{{ route('logout') }}" class="dud-logout" title="Logout" 
+                        @endif
+                        @else
+                        <li class="social-icon-item">
+                        <a href="{{ route('logout') }}" class="social-icon-link bi-login" title="Logout" 
                             onclick="event.preventDefault(); document.getElementById('logout-form').submit();">
-                                logout
+                                Logout
                             </a>
                             <form id="logout-form" action="{{ route('logout') }}" method="POST" class="d-none">
                                 @csrf
                             </form>
-                        </li> --}}
+                        </li>
+                    @endguest
                     </ul>
                 </div>
 

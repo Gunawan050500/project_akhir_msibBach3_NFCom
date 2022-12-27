@@ -16,7 +16,7 @@ $ar_kategori = App\Models\Kategori_Kegiatan::all();
                 </ul>
             </div>
         @endif
-        <form method="POST" action="{{route('donasi.update', $row->id)}}">
+        <form method="POST" action="{{route('donasi.update', $row->id)}}" enctype="multipart/form-data">
         @csrf
         @method('PUT')
             <div class="form-group row">
@@ -38,12 +38,21 @@ $ar_kategori = App\Models\Kategori_Kegiatan::all();
                 </div>
             </div>
             
+            <div class="form-group row">
+            <label for="no_hp" class="col-sm-3 col-form-label">Bukti Transfer</label>
+            <div class="col-sm-9">
+                <input type="file" class="form-control" name="bukti_transfer">
+                @if(!empty($row->bukti_transfer)) <img src="{{url('admin/images/bukti_transfer')}}/{{$row->bukti_transfer}}" alt="Profile" class="img-panel mt-2" style="width: 20%">
+                <br/>{{$row->bukti_transfer}}
+                @endif
+            </div>
+            </div>
 
             <div class="form-group row">
             <label class="col-sm-3 col-form-label">Donatur</label>
             <div class="col-sm-5">
-                <select class="form-select" name="jabatan_id">
-                    <option selected>-- Pilih Donatur --</option>
+                <select class="form-select" name="donatur_id">
+                    <option selected class="text-center">-- Pilih Donatur --</option>
                     @foreach($ar_donatur as $don)
                     @php $sel = ($don->id == $row->donatur_id) ? 'selected' : ''; @endphp
                     <option value="{{ $don->id }}" {{ $sel }}>{{ $don->nama }}</option>
@@ -52,9 +61,22 @@ $ar_kategori = App\Models\Kategori_Kegiatan::all();
             </div>
             </div>
 
-            <div class="text-center">
-                <button type="submit" class="btn btn-success">Ubah</button>
-                <a class="btn btn-secondary" href="{{url('donasi')}}">Cancel</a>
+            <div class="form-group row">
+            <label class="col-sm-3 col-form-label">Metode Pembayaran</label>
+            <div class="col-sm-5">
+                <select class="form-select" name="metode_pembayaran_id">
+                    <option selected class="text-center">-- Pilih Metode Pembayaran --</option>
+                    @foreach($ar_metode_pembayaran as $mepem)
+                    @php $sel = ($mepem->id == $row->metode_pembayaran_id) ? 'selected' : ''; @endphp
+                    <option value="{{ $mepem->id }}" {{ $sel }}>{{ $mepem->nama }}</option>
+                    @endforeach
+                </select>
+            </div>
+            </div>
+
+            <div class="text-left">
+                <button type="submit" title="Simpan Donasi" class="btn btn-success">Ubah</button>
+                <a class="btn btn-secondary" title="Kembali" href="{{url('donasi')}}">Cancel</a>
             </div>
         </form>
     </div>

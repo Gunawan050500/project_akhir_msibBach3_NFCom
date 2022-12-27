@@ -76,7 +76,7 @@ class UserController extends Controller
         //apakah user inin upload foto
         if (!empty($request->foto)) {
             //$fileName = $request->foto->getClientOriginal
-            $fileName = 'foto-' . $request->nip . '.' . $request->foto->extension();
+            $fileName = 'foto-' . $request->nama . '.' . $request->foto->extension();
             //Ini figunakan untuk meletakkan fotonya di mana
             $request->foto->move(public_path('admin/images'), $fileName);
         } else {
@@ -150,7 +150,7 @@ class UserController extends Controller
         //apakah user inin upload foto
         if (!empty($request->foto)) {
             //$fileName = $request->foto->getClientOriginal
-            $fileName = 'foto-' . $request->nip . '.' . $request->foto->extension();
+            $fileName = 'foto-' . $request->nama . '.' . $request->foto->extension();
             //Ini figunakan untuk meletakkan fotonya di mana
             $request->foto->move(public_path('admin/images'), $fileName);
         } else {
@@ -183,6 +183,8 @@ class UserController extends Controller
      */
     public function destroy($id)
     {
+        $row = User::find($id);
+        if (!empty($row->foto)) unlink(public_path() . '/admin/images/' . '/' . $row->foto);
         $row = User::find($id);
         User::where('id', $id)->delete();
         return redirect()->route('user.index')

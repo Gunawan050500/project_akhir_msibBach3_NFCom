@@ -3,7 +3,7 @@
 <div class="col-md-12">
         <h5 class="mt-5">Form Anak Asuh</h5>
         <hr>
-        @if($errors->any())
+        {{-- @if($errors->any())
             <div class="alert alert-danger">
                 <strong>Whoops!</strong> Terjadi kesalahann saat Input data<br>
                 <ul>
@@ -12,7 +12,7 @@
                     @endforeach
                 </ul>
             </div>
-        @endif
+        @endif --}}
         <form method="POST" action="{{route('anak_asuh.store')}}" enctype="multipart/form-data">
         @csrf
             <div class="form-group row">
@@ -88,9 +88,9 @@
                     <input type="file" class="form-control" name="foto">
                 </div>
             </div>
-            <div class="text-center">
+            <div class="text-left">
                 <button type="submit" class="btn btn-success">Simpan</button>
-                <button type="reset" class="btn btn-secondary" href="{{ url('anak_asuh') }}">Batal</button>
+                <a type="reset" class="btn btn-secondary" href="{{ url('anak_asuh') }}">Cancel</a>
             </div>
         </form>
     </div>

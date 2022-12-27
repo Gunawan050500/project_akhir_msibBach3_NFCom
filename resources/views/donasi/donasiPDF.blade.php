@@ -15,7 +15,9 @@
                 <th>Keterangan</th>
                 <th>Tanggal Donasi</th>
                 <th>Jumlah Donasi</th>
+                <th>Bukti Transfer</th>
                 <th>Nama Donatur</th>
+                <th>Metode Pembayaran</th>
             </tr>
         </thead>
         <tbody>
@@ -25,8 +27,18 @@
                 <td>{{ $no++ }}</td>
                 <td>{{ $row->keterangan }}</td>
                 <td>{{ $row->tgl_donasi }}</td>
-                <td>Rp. {{ number_format($row->jml_donasi,2,',','.') }}</td>
+                <td>{{ $row->jml_donasi }}</td>
+                <td>
+                    @empty($row->bukti_transfer)
+                    <img src="{{url('admin/images/bukti_transfer/nophotos.png')}}" width="80px" alt="Profile" class="rounded-square"
+                        >
+                    @else
+                    <img src="{{url('admin/images/bukti_transfer')}}/{{$row->bukti_transfer}}" width="80px" alt="Profile"
+                        class="rounded-square">
+                    @endempty
+                </td>
                 <td>{{ $row->donatur->nama }}</td>
+                <td>{{ $row->metode_pembayaran->nama }}</td>
             </tr>
             @endforeach
         </tbody>

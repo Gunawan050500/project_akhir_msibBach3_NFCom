@@ -2,13 +2,14 @@
 
 namespace App\Http\Controllers;
 
-use App\Models\Donasi;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\DB;
 use Barryvdh\DomPDF\Facade\Pdf;
 //ini extension data koneksinya
+use App\Models\Donasi;
 use App\Models\Donatur;
 use App\Exports\DonasiExport;
+use App\Models\Metode_pembayaran;
 // //ini yang vendor excellnya
 use Maatwebsite\Excel\Facades\Excel;
 //ini bagian untuk sweetaler
@@ -37,7 +38,8 @@ class DonasiController extends Controller
     {
         //arahkan ke form input data
         $ar_donatur = Donatur::all();
-        return view('donasi.form', compact('ar_donatur'));
+        $ar_metode_pembayaran = Metode_pembayaran::all();
+        return view('donasi.form', compact('ar_donatur', 'ar_metode_pembayaran'));
     }
 
     /**
@@ -50,21 +52,49 @@ class DonasiController extends Controller
     {
         $request->validate(
             [
-                'keterangan' => 'required',
+                'keterangan' => 'required|string|max:150',
                 'tgl_donasi' => 'required',
                 'jml_donasi' => 'required',
-                'donatur_id' => 'required',
+                'bukti_transfer' => 'nullable|image|mimes:jpg,jpeg,png,gift,svg|max:2048',
+                'donatur_id' => 'required|integer:45',
+                'metode_pembayaran_id' => 'required',
             ],
 
             [
                 'keterangan.required' => 'Keterangan Wajib diisi',
                 'tgl_donasi.required' => 'Tanggal Donasi Wajib diisi',
                 'jml_donasi.required' => 'Jumlah Donasi Wajib diisi',
+                'bukti_transfer.mimes' => 'Bukti Transfer harus berupa jpg, png, girf, svg',
+                'bukti_transfer.max' => 'Ukuran gambar maksimal 2048 KB',
                 'donatur_id.required' => 'Kategori Kegiatan Wajib diisi',
+                'donatur_id.integer' => 'Donatur Wajib diisi sesuai dengan yang tersedia di dalam pilihan',
+                'metode_pembayaran_id.required' => 'Metode Pembayaran Wajib diisi',
             ]
         );
 
-        Donasi::create($request->all());
+        //apakah ingin upload bukti transfer
+        if (!empty($request->bukti_transfer)) {
+            //$fileName = $request->bukti_transfer->getClientOriginal
+            $fileName = 'bukti_transfer-' . $request->tgl_donasi . '.' . $request->bukti_transfer->extension();
+            //Ini digunakan untuk meletakkan fotonya di mana
+            $request->bukti_transfer->move(public_path('admin/images/bukti_transfer'), $fileName);
+        } else {
+            $fileName = '';
+        }
+
+        DB::table('donasi')->insert(
+            [
+                'keterangan' => $request->keterangan,
+                'tgl_donasi' => $request->tgl_donasi,
+                'jml_donasi' => $request->jml_donasi,
+                'bukti_transfer' => $fileName,
+                'donatur_id' => $request->donatur_id,
+                'metode_pembayaran_id' => $request->metode_pembayaran_id,
+                'created_at' => now(),
+            ]
+        );
+        // Donasi::create($request->all());
+
 
         return redirect()->route('donasi.index')
             ->with('success', 'donasi Berhasil Disimpan');
@@ -78,9 +108,7 @@ class DonasiController extends Controller
      */
     public function show($id)
     {
-        //arahkan ke detail
-        $row = Donasi::find($id);
-        return view('donasi.detail', compact('row'));
+        return redirect()->back();
     }
 
     /**
@@ -92,8 +120,9 @@ class DonasiController extends Controller
     public function edit($id)
     {
         $ar_donatur = Donatur::all();
+        $ar_metode_pembayaran = Metode_pembayaran::all();
         $row = Donasi::find($id);
-        return view('donasi.form_edit', compact('ar_donatur', 'row'));
+        return view('donasi.form_edit', compact('ar_donatur', 'ar_metode_pembayaran', 'row'));
     }
 
     /**
@@ -109,21 +138,36 @@ class DonasiController extends Controller
             'keterangan' => 'required',
             'tgl_donasi' => 'required',
             'jml_donasi' => 'required',
+            'bukti_transfer' => 'nullable|image|mimes:jpg,jpeg,png,gift,svg|max:2048',
             'donatur_id' => 'required',
+            'metode_pembayaran_id' => 'required',
+
         ]);
+
+        //apakah ingin upload bukti transfer
+        if (!empty($request->bukti_transfer)) {
+            //$fileName = $request->bukti_transfer->getClientOriginal
+            $fileName = 'bukti_transfer-' . $request->donatur_id->nama . '-' . now()->format('Y-m-d His') . '.' . $request->bukti_transfer->extension();
+            //Ini digunakan untuk meletakkan fotonya di mana
+            $request->bukti_transfer->move(public_path('admin/images/bukti_transfer'), $fileName);
+        } else {
+            $fileName = '';
+        }
 
         DB::table('donasi')->where('id', $id)->update(
             [
                 'keterangan' => $request->keterangan,
                 'tgl_donasi' => $request->tgl_donasi,
                 'jml_donasi' => $request->jml_donasi,
+                'bukti_transfer' => $request->bukti_transfer,
                 'donatur_id' => $request->donatur_id,
+                'metode_pembayaran_id' => $request->metode_pembayaran_id,
                 'updated_at' => now(),
 
             ]
         );
 
-        return redirect()->route('donatur.index')
+        return redirect()->route('donasi.index')
             ->with('success', 'donatur Berhasil Disimpan');
     }
 
@@ -136,6 +180,7 @@ class DonasiController extends Controller
     public function destroy($id)
     {
         $row = Donasi::find($id);
+        if (!empty($row->bukti_transfer)) unlink(public_path() . '/admin/images/bukti_transfer/' . '/' . $row->bukti_transfer);
         Donasi::where('id', $id)->delete();
         return redirect()->route('donasi.index')
             ->with('success', 'Data Kegiatan Berhasil dihapus');

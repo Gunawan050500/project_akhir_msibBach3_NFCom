@@ -94,7 +94,7 @@
     <script src="{{ asset ('landingpage/js/click-scroll.js') }}"></script>
     <script src="{{ asset ('landingpage/js/counter.js') }}"></script>
     <script src="{{ asset ('landingpage/js/custom.js') }}"></script>
-
+    @yield('logic')
     
 
 </body>

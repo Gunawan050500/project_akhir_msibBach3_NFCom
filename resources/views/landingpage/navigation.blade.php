@@ -23,7 +23,7 @@
                 </li>
                 
                     <li class="nav-item">
-                        <a class="nav-linkk {{ Request::is('kategori') || Request::is('detail') ? 'active' : ''}}" href="#">Kegiatan</a>
+                        <a class="nav-linkk {{ Request::is('kategori') || Request::is('detail') ? 'active' : ''}}" href="{{ url('/kegiatanld')}}">Kegiatan</a>
                     </li>
 
                     <li class="nav-item dropdown">
@@ -43,7 +43,7 @@
 
                     <li class="nav-item ms-3">
                         <a class="nav-linkk custom-btn custom-border-btn  {{ Request::is('Donasi') ? 'active' : ''}}"
-                         href="{{ url('/Donasi')}}">Donasi</a>
+                         href="{{ url('/donet')}}">Donasi</a>
                     </li>
 
                 </ul>

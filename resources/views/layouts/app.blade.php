@@ -7,16 +7,16 @@
     <!-- CSRF Token -->
     <meta name="csrf-token" content="{{ csrf_token() }}">
 
-    <title>{{ config('app.name', 'Laravel') }}</title>
+    <title>Yayasan Rumah Yatim</title>
 
     <!-- Fonts -->
     <link rel="dns-prefetch" href="//fonts.gstatic.com">
     <link href="https://fonts.bunny.net/css?family=Nunito" rel="stylesheet">
     <!-- Favicon icon -->
-	<link rel="icon" href="{{ url ('admin/images/favicon.ico') }}" type="image/x-icon">
+	<link rel="icon" href="{{url('landingpage/images/logo.png')}}" type="image/x-icon">
 
 	<!-- vendor css -->
-	<link rel="stylesheet" href="{{ asset('admin/css/style.css') }}">
+	<link rel="stylesheet" href="{{ asset('admin/css/style2.css') }}">
 
     <!-- Scripts -->
     @vite(['resources/sass/app.scss', 'resources/js/app.js'])

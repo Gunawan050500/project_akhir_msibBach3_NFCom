@@ -47,7 +47,9 @@
                             <th>Keterangan</th>
                             <th>Tanggal Donasi</th>
                             <th>Jumlah Donasi</th>
+                            <th>Bukti Transfer</th>
                             <th>Nama Donatur</th>
+                            <th>Metode Pembayaran</th>
                             <th>Aksi</th>
                         </tr>
                     </thead>
@@ -58,17 +60,23 @@
                             <td>{{ $no++ }}</td>
                             <td>{{ $row->keterangan }}</td>
                             <td>{{ $row->tgl_donasi }}</td>
-                            <td>Rp. {{ number_format($row->jml_donasi,2,',','.') }}</td>
+                            <td>Rp. {{ number_format($row->jml_donasi, 2,',','.') }}</td>
+                            <td>
+                                @empty($row->bukti_transfer)
+                                <img src="{{url('admin/images/bukti_transfer/nophotos.png')}}" width="80px" alt="Profile" class="rounded-square"
+                                    >
+                                @else
+                                <img src="{{url('admin/images/bukti_transfer')}}/{{$row->bukti_transfer}}" width="80px" alt="Profile"
+                                    class="rounded-square">
+                                @endempty
+                            </td>
                             <td>{{ $row->donatur->nama }}</td>
+                            <td>{{ $row->metode_pembayaran->nama }}</td>
                             <td>
                             {{-- <form method="POST" action="{{route('Kategori_Kegiatan.destroy', $row->id)}}"> --}}
                                 <form method="POST" id="formHapus">
                                     @csrf
                                     @method('DELETE')
-                                    <a class="btn btn-info btn-sm" title="Detail Donasi"
-                                        href="{{ route('donasi.show', $row->id) }}">
-                                        <i class="fa fa-eye"></i>
-                                    </a>
                                     <a class="btn btn-warning btn-sm" title="Ubah Donasi"
                                         href="{{ route('donasi.edit', $row->id) }}">
                                         <i class="fas fa-pencil-alt"></i>

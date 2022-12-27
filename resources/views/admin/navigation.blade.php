@@ -25,25 +25,57 @@
 					</div> --}}
 				</div>
 				
-				<ul class="nav pcoded-inner-navbar ">
-					<li class="nav-item pcoded-menu-caption">
+				<ul class="nav pcoded-inner-navbar "></br>
+				<li class="nav-item pcoded-menu-caption">
 						<label>Navigation</label>
 					</li>
 					<li class="nav-item">
-					    <a href="{{ url('/administrator') }}" class="nav-link "><span class="pcoded-micon"><i class="feather icon-home"></i></span><span class="pcoded-mtext">Dashboard</span></a>
+					    <a href="{{ url('/dashboardcount') }}" class="nav-link "><span class="pcoded-micon">
+							<i class="feather icon-home"></i></span><span class="pcoded-mtext">Dashboard</span></a>
 					</li>
 					<li class="nav-item">
 					    <a href="{{ url('/user') }}" class="nav-link "><span class="pcoded-micon"><i class="feather icon-user"></i></span><span class="pcoded-mtext">Kelola User</span></a>
 					</li>
+
 					<li class="nav-item pcoded-hasmenu">
-					    <a href="#!" class="nav-link "><span class="pcoded-micon"><i class="feather icon-layout"></i></span><span class="pcoded-mtext">Master Data</span></a>
+					    <a href="#!" class="nav-link "><span class="pcoded-micon"><i class="feather icon-layout">
+						</i></span><span class="pcoded-mtext">Master Data</span></a>
 					    <ul class="pcoded-submenu">
-					        <li><a href="{{ url('/anak_asuh') }}">Anak Asuh</a></li>
-					        <li><a href="{{ url('/donatur') }}">Donatur</a></li>
-					        <li><a href="{{ url('/donasi') }}">Donasi</a></li>
-							<li><a href="{{ url('/kategori_kegiatan') }}">Kategori Kegiatan</a></li>
-							<li><a href="{{ url('/kegiatan') }}">Kegiatan</a></li>
+						<li class="nav-item">
+					    <a href="{{ url('/anak_asuh') }}" class="nav-link ">Anak Asuh</a>
+					</li>
+						<li><a href="{{ url('/donatur') }}">Donatur</a></li>
+					<li class="nav-item">
+					    <a href="{{ url('/donasi') }}">Donasi</a></li>
+					</li>
+					<li class="nav-item">
+					    <a href="{{ url('/metode_pembayaran') }}">Metode Pembayaran</a></li>
+					</li>
+					</ul>
+
+					<li class="nav-item pcoded-hasmenu">
+					    <a href="#!" class="nav-link "><span class="pcoded-micon"><i class="feather icon-box">
+						</i></span><span class="pcoded-mtext">Blog</span></a>
+					    <ul class="pcoded-submenu">
+						<li class="nav-item">
+					    <a href="{{ url('/categories') }}" class="nav-link ">Kategori</a>
+					</li>
+						<li><a href="{{ url('/tags') }}">Tags</a></li>
+					<li class="nav-item">
+					    <a href="{{ url('/posts') }}">Kegiatan</a></li>
 					    </ul>
+					</li>
+					
+					<li class="nav-item">
+					    <a href="{{ url('/posts/trash') }}" class="nav-link "><span class="pcoded-micon">
+						<i class="feather icon-trash"></i></span><span class="pcoded-mtext">Trash</span></a>
+					</li>
+
+					<li class="nav-item">
+					    <a href="{{ route('logout') }}" class="dud-logout" title="Logout" class="nav-link"
+						onclick="event.preventDefault(); document.getElementById('logout-form').submit();">
+							<span class="pcoded-micon">
+						<i class="feather icon-log-out"></i></span><span class="pcoded-mtext">Log Out</span></a>
 					</li>
 				</ul>
 				

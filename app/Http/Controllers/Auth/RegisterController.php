@@ -93,7 +93,7 @@ class RegisterController extends Controller
      */
     protected function create(array $data)
     {
-        Alert::success('Registrasi Berhasil!', 'Anda baru bisa login hingga admin mengaktivasi akun mu, tunggu paling lambat 1x24 jam sampai admin mengaktifkan akunmu')->persistent('Close');
+        Alert::success('Registrasi Berhasil!', 'Anda baru bisa login hingga admin mengaktivasi akun anda, tunggu paling lambat 1x24 jam sampai admin mengaktifkan akunmu')->persistent('Close');
         return User::create([
             'nama' => $data['nama'],
             'no_hp' => $data['no_hp'],

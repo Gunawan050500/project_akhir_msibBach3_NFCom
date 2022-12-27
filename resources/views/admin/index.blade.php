@@ -17,7 +17,8 @@
     <meta name="keywords" content="">
     <meta name="author" content="Phoenixcoded" />
     <!-- Favicon icon -->
-    <link rel="icon" href="{{ url ('admin/images/favicon.ico') }}" type="image/x-icon">
+    <!--link rel="icon" href="{{ url ('admin/images/favicon.ico') }}" type="image/x-icon"-->
+    <link href="{{url('landingpage/images/logo.png')}}" rel="shortcut icon">
 
     {{--  link bootstrap icons  --}}
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.10.1/font/bootstrap-icons.css">
@@ -29,7 +30,7 @@
     {{--  <!-- JavaScript Bundle with Popper -->  --}}
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.2.2/dist/js/bootstrap.bundle.min.js" integrity="sha384-OERcA2EqjJCMA+/3y+gxIOqMEjwtxJY7qPCqsdltbNJuaOe923+mo//f6V8Qbsw3" crossorigin="anonymous"></script>
     {{--  <!-- vendor css -->  --}}
-    <link rel="stylesheet" href="{{ asset ('admin/css/style.css') }}"> 
+    <link rel="stylesheet" href="{{ asset ('admin/css/style2.css') }}"> 
 
     {{--  MDB  --}}
     <link href="https://cdnjs.cloudflare.com/ajax/libs/mdb-ui-kit/6.0.1/mdb.min.css"
@@ -58,7 +59,7 @@
 <div class="pcoded-main-container">
     <div class="pcoded-content">
         <!-- [ breadcrumb ] start -->
-        <div class="page-header">
+        <!--<div-- class="page-header">
             <div class="page-block">
                 <div class="row align-items-center">
                     <div class="col-md-12">
@@ -72,7 +73,7 @@
                     </div>
                 </div>
             </div>
-        </div>
+        </div-->
         <!-- [ breadcrumb ] end -->
         <!-- [ Main Content ] start -->
         <div class="row">
@@ -98,6 +99,11 @@
 
 <!-- custom-chart js -->
 <script src="{{ asset ('admin/js/pages/dashboard-main.js') }}"></script>
+
+<script src="{{ asset('admin/vendor/chart.js/chart.min.js')}}"></script> 
+
+@yield('sweetalert2')
+
 @livewireScripts
 </body>
 

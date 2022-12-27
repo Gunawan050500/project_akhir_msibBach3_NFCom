@@ -14,7 +14,7 @@ use Maatwebsite\Excel\Facades\Excel;
 use RealRashid\SweetAlert\Facades\Alert;
 
 //tutorial untuk pagination
-https: //www.malasngoding.com/
+// https: //www.malasngoding.com/
 
 class DonaturController extends Controller
 {
@@ -30,6 +30,45 @@ class DonaturController extends Controller
         $donatur = Donatur::orderBy('id', 'DESC')->paginate(10);
         return view('donatur.index', compact('donatur'));
         //di compact=> dengan membawa array divisi
+    }
+
+    public function apiDonatur()
+    {
+        //digunakan untuk menampilkan data secara keseluruhan
+        $donatur = Donatur::all();
+        return response()->json(
+            [
+                'success' => true,
+                'message' => 'Data Donatur',
+                'data' => $donatur,
+            ],
+            200 //200 kalau pesan atau api yang ditawarkan telah sukses
+        );
+    }
+
+    public function apiDonaturDetail($id)
+    {
+        //Menampilkan data seorang pegawai        
+        $donatur = Donatur::find($id);
+        if ($donatur) {
+            return response()->json(
+                [
+                    'success' => true,
+                    'message' => 'Detail Donatur',
+                    'data' => $donatur,
+                ],
+                200 //200 kalau pesan atau api yang ditawarkan telah sukses
+            );
+        } else {
+            return response()->json(
+                [
+                    'success' => false,
+                    'message' => 'Detail Donatur tidak ditemukan',
+                    'data' => $donatur,
+                ],
+                404 //404 kalau pesan atau api yang ditawarkan tidak ditemukan
+            );
+        }
     }
 
     /**
@@ -77,8 +116,7 @@ class DonaturController extends Controller
      */
     public function show($id)
     {
-        $row = Donatur::find($id);
-        return view('donatur.detail', compact('row'));
+        return redirect()->back();
     }
 
     /**

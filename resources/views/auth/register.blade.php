@@ -5,8 +5,11 @@
 <!-- [ auth-signup ] start -->
 <div class="auth-wrapper">
 	<div class="auth-content">
-		<img src="assets/images/logo.png" alt="" class="img-fluid mb-4">
-		<div class="card borderless">
+    <a class="navbar-brandd">
+    <img src="{{ url ('landingpage/images/logo.png') }}" alt="" class="logoo">
+    <span>Yayasan Rumah Yatim</span>
+    </a>
+    <div class="card shadow mb-4">
 			<div class="row align-items-center">
 				<div class="col-md-12">
 					<div class="card-body">

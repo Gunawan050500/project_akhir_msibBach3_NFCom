@@ -13,10 +13,10 @@ class DonasiExport implements FromCollection, WithHeadings
      */
     public function collection()
     {
-        return Donasi::select("keterangan", "tgl_donasi", "jml_donasi", "donatur_id")->get();
+        return Donasi::select("keterangan", "tgl_donasi", "jml_donasi", "bukti_transfer", "donatur_id", "metode_pembayaran_id")->get();
     }
     public function headings(): array
     {
-        return ["Keterangan", "Tanggal donasi", "Jumlah Donasi", "Donatur"];
+        return ["Keterangan", "Tanggal donasi", "Jumlah Donasi", "Bukti Transfer", "ID Donatur", "ID Metode Pembayaran"];
     }
 }

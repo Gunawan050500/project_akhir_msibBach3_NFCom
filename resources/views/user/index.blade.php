@@ -1,9 +1,29 @@
 @extends('admin.index')
 @section('content')
+
+ <!-- [ breadcrumb ] start -->
+ <di class="page-header">
+            <div class="page-block">
+                <div class="row align-items-center">
+                    <div class="col-md-12">
+                        <div class="page-header-title">
+                            <h5 class="m-b-10">Setting</h5>
+                        </div>
+                        <ul class="breadcrumb">
+                            <li class="breadcrumb-item"><a href="index.html"><i class="feather icon-home"></i></a></li>
+                            <li class="breadcrumb-item"><a href="#!">Setting</a></li>
+                            <li class="breadcrumb-item"><a href="#!">Kelola User</a></li>
+                        </ul>
+                    </div>
+                </div>
+            </div>
+        </di>
+        <!-- [ breadcrumb ] end -->
+
 <div class="col-md-12">
     <div class="card shadow mb-4">
         <div class="card-header py-3">
-            <h6 class="m-0 font-weight-bold text-primary">Data User</h6>
+            <h6 class="m-0 font-weight-bold text-dark">Data User</h6>
         </div>
 
         @if ($message = Session::get('success'))
@@ -14,23 +34,25 @@
         <div class="mt-3">
             <div class="row">
                 <div class="col-6">
-                    <a class="btn btn-info btn-sm ml-4" title="Tambah User" href="{{route('user.create')}}"><i
-                            class="bi bi-file-plus-fill"></i>Tambah</a>
-                    &nbsp;
-                    <a class="btn btn-danger btn-sm" title="Export to PDF User" href="{{url('user-pdf')}}"><i
-                            class="fas fa-file-pdf"></i></a>
-                    &nbsp;
-                    <a class="btn btn-success btn-sm" title="Export to Excel User" href="{{url('user-excel')}}"><i
-                            class="fas fa-file-excel"></i></a>
+                    <a class="btn btn-info btn-sm ml-4" title="Tambah User" href="{{route('user.create')}}">
+                        <i class="fas fa-plus"> add</i></a> 
+
+                    <a class="btn btn-danger btn-sm" title="Export to PDF User" href="{{url('user-pdf')}}">
+                        <i class="fas fa-file-pdf"></i></a>
+                   
+                    <a class="btn btn-success btn-sm" title="Export to Excel User" href="{{url('user-excel')}}">
+                        <i class="fas fa-file-excel"></i></a>
                 </div>
-                <div class="col-6">
-                    <nav class="justify-content-between mr-4" style="width: 70%">
-                        <form class="form-inline" action="{{url('user-cari')}}" method="GET">
-                            <input class="form-control mr-sm-2 form-sm" type="text" name="cari" placeholder="Search"
-                                aria-label="Search" value="{{ old('cari') }}">
-                            <input class="btn btn-outline-success" type="submit" value="Cari">
+                &emsp; &emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;
+                <div class="col-4">
+                <nav class="justify-content-between mr-4" style="width: 100%">
+                        <form class="form-inlinee" action="{{url('user-cari')}}" method="GET">
+                            <input class="form-controll mr-sm-2 form-sm" type="text" name="cari" 
+                            placeholder="Search" aria-label="Search" value="{{ old('cari') }}">
+                            <button class="btn btn-outline-success" type="submit" value="Cari">
+                            <i class="bi bi-search"></i></button>
                         </form>
-                    </nav>
+                </nav>
                 </div>
             </div>
             <div class="card-body">

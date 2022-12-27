@@ -68,10 +68,6 @@
                                     <form method="POST" id="formHapus">
                                         @csrf
                                         @method('DELETE')
-                                        <a class="btn btn-info btn-sm" title="Detail Donatur"
-                                            href="{{route('donatur.show', $row->id)}}">
-                                            <i class="fa fa-eye"></i>
-                                        </a>
                                         <a class="btn btn-warning btn-sm" title="Ubah Donatur"
                                             href="{{route('donatur.edit', $row->id)}}">
                                             <i class="fas fa-pencil-alt"></i>

@@ -12,7 +12,7 @@
             @endif
           <div class="card-body text-center">
             @empty($row->foto)
-              <img src="{{url('admin/images/no_photo.png')}}" alt="Profile" class="rounded-circle" style="width:40%; margin-top: 10%; margin-left: 20%">
+              <img src="{{url('admin/images/nophotos.png')}}" alt="Profile" class="rounded-circle" style="width:40%; margin-top: 10%;">
             @else
               <img src="{{url('admin/images')}}/{{$row->foto}}" alt="Profile" class="rounded-circle" style="width:40%; margin-top: 10%">
             @endempty

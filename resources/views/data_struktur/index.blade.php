@@ -48,10 +48,7 @@
                                 <tr bgcolor="#5bc1ac">
                                     <th>No</th>
                                     <th>Nama</th>
-                                    <th>No Handphone</th>
-                                    <th>Email</th>
                                     <th>Status</th>
-                                    <th>Role</th>
                                     <th>Detail</th>
                                 </tr>
                             </thead>
@@ -61,10 +58,7 @@
                                 <tr>
                                     <td>{{ $no++ }}</td>
                                     <td>{{ $row->nama }}</td>
-                                    <td>{{ $row->no_hp }}</td>
-                                    <td>{{ $row->email }}</td>
                                     <td>{{ $row->status }}</td>
-                                    <td>{{ $row->role }}</td>
                                     <td>
                                         {{-- <form method="POST" action="{{route('user.destroy', $row->id)}}"> --}}
                                             <a class="btn btn-info btn-sm" title="Detail User"

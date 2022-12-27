@@ -142,7 +142,7 @@ class Anak_asuhController extends Controller
         $row = Anak_asuh::find($id);
         if (!empty($request->foto)) {
             //jika ada foto lama, hapus foto lamanya terlebih dahulu
-            if (!empty($row->foto)) unlink('admin/images/' . $row->foto);
+            if (!empty($row->foto)) unlink(public_path() . '/admin/images/' . '/' . $row->foto);
             //proses foto lama ganti foto baru
             $fileName = 'foto-' . $request->nama . '.' . $request->foto->extension();
             //$fileName = $request->foto->getClientOriginalName();
@@ -180,7 +180,7 @@ class Anak_asuhController extends Controller
     {
         //sebelum hapus data, hapus terlebih dahulu fisik file fotonya jika ada
         $row = Anak_asuh::find($id);
-        if (!empty($row->foto)) unlink('admin/images/' . $row->foto);
+        if (!empty($row->foto)) unlink(public_path() . '/admin/images/' . '/' . $row->foto);
         //setelah itu baru hapus data anak asuh
         Anak_asuh::where('id', $id)->delete();
         return redirect()->route('anak_asuh.index')
